@@ -7,7 +7,7 @@ import Home from "./components/home.component";
 import About from "./components/about.component";
 import Farms from "./components/farms.component";
 import Shop from "./components/shop.component";
-
+import Account from "./components/account.component";
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/farms" component={Farms} />
         <Route path="/shop" component={Shop} />
+        <Route path="/account" component={Account} />
       </div>
     </Router>
   );
