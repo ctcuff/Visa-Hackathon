@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar.component";
 import Home from "./components/home.component";
 import About from "./components/about.component";
+import Farms from "./components/farms.component";
 import Shop from "./components/shop.component";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <br/>
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/farms" component={Farms} />
         <Route path="/shop" component={Shop} />
       </div>
     </Router>
