@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
 import {Form} from 'react-bootstrap';
-
-function addProduct() {
-
-}
+import { ReactDOM } from 'react-dom';
 
 export default class Merchant extends Component {
+  constructor(props) {
+    super(props);
+    this.merchant = React.createRef();
+    this.business = React.createRef();
+    this.address = React.createRef();
+    this.email = React.createRef();
+    this.phone = React.createRef();
+  }
+  
+  addMerchant = (event) => {
+    event.preventDefault();
+    alert("You are submitting " + this.merchant.current.value +
+    this.business.current.value +
+    this.address.current.value +
+    this.email.current.value +
+    this.phone.current.value);
+  }
+
+  merchantHandler = (event) => {
+    this.setState({merchant: event.target.value});
+  }
+
   render() {
     return (
       <div>
@@ -13,26 +32,26 @@ export default class Merchant extends Component {
         <Form>
         <Form.Group controlId="formMerchant">
           <Form.Label>Merchant Name</Form.Label>
-          <Form.Control type="text" placeholder="First, Last" />
+          <Form.Control type="text" placeholder="First, Last" ref={this.merchant}/>
         </Form.Group>
         <Form.Group controlId="formBusiness">
           <Form.Label>Business</Form.Label>
-          <Form.Control type="text" placeholder="Enter Business" />
+          <Form.Control type="text" placeholder="Enter Business" ref={this.business}/>
         </Form.Group>
         <Form.Group controlId="formAddress">
           <Form.Label>Street Address</Form.Label>
-          <Form.Control type="address" placeholder="123 River Drive" />
+          <Form.Control type="address" placeholder="123 River Drive" ref = {this.address}/>
         </Form.Group>
-        <Form.Group controlId="formProduct">
-          <Form.Label>Product</Form.Label>
-          <Form.Control type="text" placeholder="Blueberries" />
+        <Form.Group controlId="formEmail">
+          <Form.Label>Email Contact</Form.Label>
+          <Form.Control type="email" placeholder="example@somesite.com" ref={this.email}/>
         </Form.Group>
-        <Form.Group controlId="formCount">
-          <Form.Label>Count</Form.Label>
-          <Form.Control type="number" placeholder="0" />
+        <Form.Group controlId="formPhone">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
         </Form.Group>
         </Form>
-        <button onClick={addProduct}>
+        <button onClick={this.addMerchant}>
           Add Product
         </button>
       </div>
