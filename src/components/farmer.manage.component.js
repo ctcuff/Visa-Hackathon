@@ -10,18 +10,24 @@ export default class FarmerManage extends Component {
     }
   }
 
-  handleItemnameChange = (event) => {
+  handleItemnameChange = event => {
     this.setState({
       itemname: event.target.value
     })
   }
   
-  handlePriceChange = (event) => {
+  handlePriceChange = event => {
     this.setState({
       price: event.target.value
     })
   }
 
+  handleCategoryChange = event => {
+    this.setState({
+      category: event.target.value
+    })
+  }
+  
   render() {
     return (
       <div>
@@ -46,7 +52,7 @@ export default class FarmerManage extends Component {
           
           <div>
             <label>Category</label>
-            <select>
+            <select value={this.state.category} onChange={this.handleCategoryChange} >
               <option value="vegetable">Vegetable</option>
               <option value="fruit">Fruit</option>
               <option value="dairy">Dairy</option>
