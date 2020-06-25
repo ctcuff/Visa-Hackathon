@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Input } from 'antd';
+
+const { Search } = Input;
 
 export default class Navbar extends Component {
+  searchProduct = (searchtext) => {
+    alert("You are submitting " + searchtext)
+  }
 
   render() {
     return (
@@ -20,6 +26,7 @@ export default class Navbar extends Component {
           <Link to="/shop" className="nav-link">Shop</Link>
           </li>
         </ul>
+        <Search placeholder="input search text" onSearch={value => this.searchProduct(value)} enterButton />
         <ul className="navbar-nav">
           <NavDropdown title="Settings" id="basic-nav-dropdown">
             <NavDropdown.Item href="/account">Account</NavDropdown.Item>
