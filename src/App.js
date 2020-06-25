@@ -10,6 +10,7 @@ import Shop from "./components/shop.component";
 import Account from "./components/account.component";
 import Merchant from "./components/merchant.component";
 import FarmerManage from "./components/farmer.manage.component";
+import Customer from "./components/customer.component";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/account" component={Account} />
         <Route path="/merchant" component={Merchant} />
         <Route path="/farmermanage" component={FarmerManage} />
+        <Route path="/customer" component={Customer} />
     </Router>
   );
 }

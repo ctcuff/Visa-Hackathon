@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Form} from 'react-bootstrap';
 
-export default class Merchant extends Component {
+export default class Customer extends Component {
   constructor(props) {
     super(props);
-    this.merchant = React.createRef();
-    this.business = React.createRef();
+    this.customer = React.createRef();
     this.address = React.createRef();
     this.email = React.createRef();
     this.phone = React.createRef();
@@ -13,8 +12,7 @@ export default class Merchant extends Component {
   
   addMerchant = (event) => {
     event.preventDefault();
-    alert("You are submitting " + this.merchant.current.value +
-    this.business.current.value +
+    alert("You are submitting " + this.customer.current.value +
     this.address.current.value +
     this.email.current.value +
     this.phone.current.value);
@@ -23,15 +21,11 @@ export default class Merchant extends Component {
   render() {
     return (
       <div>
-        <p>Merchant Home page</p>
+        <p>Customer Home page</p>
         <Form>
-        <Form.Group controlId="formMerchant">
-          <Form.Label>Merchant Name</Form.Label>
+        <Form.Group controlId="formCustomer">
+          <Form.Label>Customer Name</Form.Label>
           <Form.Control type="text" placeholder="First, Last" ref={this.merchant}/>
-        </Form.Group>
-        <Form.Group controlId="formBusiness">
-          <Form.Label>Business</Form.Label>
-          <Form.Control type="text" placeholder="Enter Business" ref={this.business}/>
         </Form.Group>
         <Form.Group controlId="formAddress">
           <Form.Label>Street Address</Form.Label>
@@ -46,7 +40,7 @@ export default class Merchant extends Component {
           <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
         </Form.Group>
         </Form>
-        <button onClick={this.addMerchant}>
+        <button onClick={this.addCustomer}>
           Sign Up
         </button>
       </div>
