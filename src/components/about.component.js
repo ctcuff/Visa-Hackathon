@@ -148,6 +148,29 @@ const TeamPage = () => {
               </ul>
             </MDBCol>
           </MDBRow>
+       <MDBRow>
+          <MDBCol>
+            <img
+              tag="img"
+              src="https://images.squarespace-cdn.com/content/v1/55fc0004e4b069a519961e2d/1442590746571-RPGKIXWGOO671REUNMCB/ke17ZwdGBToddI8pDm48kKVo6eXXpUnmuNsFtLxYNDVZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7abfyk2s94xLLkDA7TSo2rckMlGDU48FfF-V7lLcSuGNU_Uf7d6wOiJwP-LWX64gbQ/image-asset.gif"
+              className="rounded-circle z-depth-1 img-fluid"
+              alt="Sample avatar"
+            />
+            <h5 className="font-weight-bold mt-4 mb-3">Andre Ruiz</h5>
+            <p className="blue-text">Mentor</p>
+            <p className="grey-text">
+              Other information
+            </p>
+            <ul className="list-unstyled mb-0">
+              <a href="#!" className="p-2 fa-lg">
+                <MDBIcon fab icon="facebook-f" className="blue-text" />
+              </a>
+              <a href="#!" className="p-2 fa-lg">
+                <MDBIcon fab icon="github" className="blue-text" />
+              </a>
+            </ul>
+          </MDBCol>
+        </MDBRow>
 
         </MDBCardBody>
       </MDBCard>
