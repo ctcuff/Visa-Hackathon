@@ -49,7 +49,7 @@ export default class FarmerManage extends Component {
               value={this.state.price}
               onChange={this.handlePriceChange}
               />
-          
+          </div>
           <div>
             <label>Category</label>
             <select value={this.state.category} onChange={this.handleCategoryChange} >
