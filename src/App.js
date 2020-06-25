@@ -15,7 +15,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container">
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/farms" component={Farms} />
@@ -23,7 +22,6 @@ function App() {
         <Route path="/account" component={Account} />
         <Route path="/merchant" component={Merchant} />
         <Route path="/farmermanage" component={FarmerManage} />
-      </div>
     </Router>
   );
 }
