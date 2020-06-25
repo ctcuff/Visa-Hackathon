@@ -14,9 +14,8 @@ import FarmerManage from "./components/farmer.manage.component";
 function App() {
   return (
     <Router>
+      <Navbar />
       <div className="container">
-        <Navbar />
-        <br/>
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/farms" component={Farms} />
