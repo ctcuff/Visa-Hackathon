@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Form} from 'react-bootstrap';
-import { ReactDOM } from 'react-dom';
 
 export default class Merchant extends Component {
   constructor(props) {
@@ -20,11 +19,7 @@ export default class Merchant extends Component {
     this.email.current.value +
     this.phone.current.value);
   }
-
-  merchantHandler = (event) => {
-    this.setState({merchant: event.target.value});
-  }
-
+  
   render() {
     return (
       <div>

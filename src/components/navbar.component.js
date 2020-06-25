@@ -33,7 +33,7 @@ export default class Navbar extends Component {
             <Link to="/merchant" className="nav-link">Merchants</Link>
           </li>
           <li className='navbar-item'>
-            <Link to="/farms" className="nav-link">Log-In</Link>
+            <Link to="/account" className="nav-link">Log-In</Link>
           </li>
         </ul>
         </div>
