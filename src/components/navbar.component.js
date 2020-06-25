@@ -30,9 +30,6 @@ export default class Navbar extends Component {
             <NavDropdown.Item href="/Contact_Us">Contact Us</NavDropdown.Item>
           </NavDropdown>
           <li className='navbar-item'>
-            <Link to="/merchant" className="nav-link">Merchants</Link>
-          </li>
-          <li className='navbar-item'>
             <Link to="/account" className="nav-link">Log-In</Link>
           </li>
         </ul>

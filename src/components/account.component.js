@@ -33,7 +33,7 @@ export default class Account extends Component {
         <p> Don't have an account?</p>
         <a href="/merchant">Merchant Sign-Up</a>
         <br></br>
-        <a href="/farms">Customer Sign-Up</a>
+        <a href="/customer">Customer Sign-Up</a>
       </div>
     )
   }
