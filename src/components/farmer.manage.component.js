@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import CurrencyInput from 'react-currency-input';
 
 export default class FarmerManage extends Component {
   getInitialState() {
@@ -68,6 +67,8 @@ export default class FarmerManage extends Component {
   }
 
 
+
+
   render() {
     return (
       <div className="container">
@@ -77,6 +78,8 @@ export default class FarmerManage extends Component {
         <div>
         <h3>View and Change Items</h3>
           <p>display each item here after querying</p>
+
+
 
             <div>
               <label>In Stock/Out of Stock</label>
