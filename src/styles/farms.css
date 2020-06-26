@@ -1,0 +1,6 @@
+.farm-carousel-img {
+    width: 100%;
+    /* Fullscreen minus the height of the navbar */
+    height: calc(100vh - 56px);
+    object-fit: cover;
+}

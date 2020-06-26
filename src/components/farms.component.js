@@ -1,3 +1,4 @@
+import '../styles/farms.css';
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import Farm1 from '../assets/Farm1.jpeg';
@@ -11,7 +12,7 @@ export default class Farms extends Component {
         <Carousel>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="farm-carousel-img"
               src={Farm1}
               alt="First slide"
             />
@@ -23,7 +24,7 @@ export default class Farms extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="farm-carousel-img"
               src={Farm2}
               alt="Second slide"
             />
@@ -36,7 +37,7 @@ export default class Farms extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="farm-carousel-img"
               src={Farm3}
               alt="Third slide"
             />
