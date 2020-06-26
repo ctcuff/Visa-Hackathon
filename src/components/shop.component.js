@@ -40,6 +40,8 @@ const columns = [{
 }
 ];
 
+let order = 'desc';
+
 const selectRowProp = {
   mode: 'checkbox',
   clickToSelect: true  // enable click to select
@@ -71,12 +73,12 @@ export default class Shop extends Component {
     return (
       <div>
         <p>Browse for groceries</p>
-        <BootstrapTable data={ products } selectRow={ selectRowProp }>
-          <TableHeaderColumn dataField='id' isKey>Product ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
-          <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
-          <TableHeaderColumn dataField='farm'>Farm Name</TableHeaderColumn>
-          <TableHeaderColumn dataField='status'>Product Status</TableHeaderColumn>
+        <BootstrapTable data={ products } selectRow={ selectRowProp } pagination>
+          <TableHeaderColumn dataField='id' isKey dataSort={ true }>Product ID</TableHeaderColumn>
+          <TableHeaderColumn dataField='name' dataSort={ true }>Product Name</TableHeaderColumn>
+          <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
+          <TableHeaderColumn dataField='farm' dataSort={ true }>Farm Name</TableHeaderColumn>
+          <TableHeaderColumn dataField='status' dataSort={ true }>Product Status</TableHeaderColumn>
         </BootstrapTable>
       </div>
     )
