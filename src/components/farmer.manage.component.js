@@ -1,6 +1,95 @@
 import React, { Component } from 'react';
+import { BootstrapTable , TableHeaderColumn, DeleteButton } from 'react-bootstrap-table';
+
+const cellEditProp = {
+  mode: 'dbclick'
+};
+
+const products = [];
+products.push({
+  id: 1,
+  name: 'Apples',
+  price: '0.50',
+  category: 'fruit',
+  status: 'in stock'
+});
+
+products.push({
+  id: 2,
+  name: 'Bananas',
+  price: '0.50',
+  category: 'fruit',
+  status: 'out of stock'
+});
+
+products.push({
+  id: 3,
+  name: 'Carrots',
+  price: '0.50',
+  category: 'vegetable',
+  status: 'in stock'
+});
+
+
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+  sort: true,
+  sortFunc: (a, b, order, dataField, rowA, rowB) => {
+    if (order === 'asc') {
+      return b - a;
+    }
+    return a - b; // desc
+  }
+}, {
+  dataField: 'name',
+  text: 'Product Name',
+  sort: true
+}, {
+  dataField: 'price',
+  text: 'Product Price',
+  sort: true
+}, {
+  dataField: 'category',
+  text: 'Category',
+  sort: true
+}, {
+  dataField: 'status',
+  text: 'Product Status'
+}
+];
+
+let order = 'desc';
+
+const selectRowProp = {
+  mode: 'checkbox',
+  clickToSelect: true  // enable click to select
+};
+
 
 export default class FarmerManage extends Component {
+  state = {
+    selectedRowKeys: [], // Check here to configure the default column
+    loading: false,
+  };
+
+  start = () => {
+     this.setState({ loading: true });
+     // ajax request after empty completing
+     setTimeout(() => {
+       this.setState({
+         selectedRowKeys: [],
+         loading: false,
+       });
+     }, 1000);
+   };
+
+   onSelectChange = selectedRowKeys => {
+     console.log('selectedRowKeys changed: ', selectedRowKeys);
+     this.setState({ selectedRowKeys });
+   };
+
+
   getInitialState() {
     return ({price: "0.00"});
   }
@@ -54,6 +143,24 @@ export default class FarmerManage extends Component {
     })
   }
 
+  handleDeleteButtonClick = (onClick) => {
+    // Custom your onClick event here,
+    // it's not necessary to implement this function if you have no any process before onClick
+    console.log('This is my custom function for DeleteButton click event');
+    onClick();
+  }
+
+  createCustomDeleteButton = (onClick) => {
+    return (
+      <DeleteButton
+        btnText='Remove Item(s)'
+        btnContextual='btn-success'
+        className='my-custom-class'
+        btnGlyphicon='glyphicon-edit'
+        onClick={ e => this.handleDeleteButtonClick(onClick) }/>
+    );
+  }
+
   // POST request can use this information
   handleSubmitAdd = event => {
     alert(`Name: ${this.state.itemname}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
@@ -70,45 +177,34 @@ export default class FarmerManage extends Component {
 
 
   render() {
+
+    const options = {
+      deleteBtn: this.createCustomDeleteButton
+    };
+    const selectRow = {
+      mode: 'checkbox'
+    };
+
     return (
       <div className="container">
         <h1>Manage Items</h1>
 
-        <form onSubmit={this.handleSubmitEdit}>
+
         <div>
         <h3>View and Change Items</h3>
-          <p>display each item here after querying</p>
 
+          <div>
+            <p>Browse for groceries</p>
+            <BootstrapTable selectRow={selectRow} data={ products } options={options} pagination cellEdit={cellEditProp} deleteRow>
+              <TableHeaderColumn dataField='id' isKey dataSort={ true }>Product ID</TableHeaderColumn>
+              <TableHeaderColumn dataField='name' dataSort={ true }>Product Name</TableHeaderColumn>
+              <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
+              <TableHeaderColumn dataField='status' dataSort={ true }>Product Status</TableHeaderColumn>
+            </BootstrapTable>
+          </div>
 
-
-            <div>
-              <label>In Stock/Out of Stock</label>
-              <select value={this.state.stock} onChange={this.handleStockChange} >
-                <option value="in stock">In Stock</option>
-                <option value="out of stock">Out of Stock</option>
-              </select>
-            </div>
-
-            <div>
-              <label>Change Price</label>
-              <input
-                type='text' pattern='^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$'
-                value={this.state.newPrice}
-                onChange={this.handleNewPriceChange}
-                />
-            </div>
-
-            <div>
-              <label>Remove Item</label>
-              <select value={this.state.remove} onChange={this.handleRemoveChange} >
-                <option value="keep">Keep</option>
-                <option value="remove">Remove</option>
-              </select>
-            </div>
-
-            <button type="submit">Submit</button>
         </div>
-        </form>
+
 
 
 
