@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
+import { BootstrapTable , TableHeaderColumn } from 'react-bootstrap-table';
 
 const products = [];
 for (let i = 0; i < 46; i++) {
@@ -14,21 +14,36 @@ for (let i = 0; i < 46; i++) {
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  sort: true,
+  sortFunc: (a, b, order, dataField, rowA, rowB) => {
+    if (order === 'asc') {
+      return b - a;
+    }
+    return a - b; // desc
+  }
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  sort: true
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  sort: true
 }, {
   dataField: 'farm',
-  text: 'Local Farm'
+  text: 'Local Farm', 
+  sort: true
 }, {
   dataField: 'status',
   text: 'Product Status'
 }
 ];
+
+const selectRowProp = {
+  mode: 'checkbox',
+  clickToSelect: true  // enable click to select
+};
 
 export default class Shop extends Component {
   state = {
@@ -56,7 +71,13 @@ export default class Shop extends Component {
     return (
       <div>
         <p>Browse for groceries</p>
-        <BootstrapTable keyField='id' data={ products } columns={ columns } />
+        <BootstrapTable data={ products } selectRow={ selectRowProp }>
+          <TableHeaderColumn dataField='id' isKey>Product ID</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
+          <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
+          <TableHeaderColumn dataField='farm'>Farm Name</TableHeaderColumn>
+          <TableHeaderColumn dataField='status'>Product Status</TableHeaderColumn>
+        </BootstrapTable>
       </div>
     )
   }
