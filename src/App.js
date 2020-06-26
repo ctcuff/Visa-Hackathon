@@ -11,6 +11,7 @@ import Account from "./components/account.component";
 import Merchant from "./components/merchant.component";
 import FarmerManage from "./components/farmer.manage.component";
 import Customer from "./components/customer.component";
+import Payment from "./components/payment.component"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/merchant" component={Merchant} />
         <Route path="/farmermanage" component={FarmerManage} />
         <Route path="/customer" component={Customer} />
+        <Route path="/payment" component={Payment} />
     </Router>
   );
 }
