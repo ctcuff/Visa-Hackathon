@@ -1,0 +1,18 @@
+{
+    "entries": [
+        {
+          "username": "Old Mcdonald",
+          "price": "3.99",
+          "category": "Vegetable",
+          "item": "Carrot"
+
+        },
+        {
+          "username": "Another one",
+          "price": "10.99",
+          "category": "Fruit",
+          "item": "Apple"
+
+        }
+    ]
+}
