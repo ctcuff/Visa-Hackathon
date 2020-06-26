@@ -8,7 +8,7 @@ export default class Home extends Component {
     return (
       <div>
         <Image src={agricultureImage} fluid className="home-landing-image" />
-        <div class="home-container container">
+        <div className="home-container container">
           <h1 className="home-heading">Welcome to the Farmer's Market Hub</h1>
           <p className="home-text">
             Farmer's Market Hub is a central hub for consumers and
