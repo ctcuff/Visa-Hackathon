@@ -9,6 +9,9 @@ export default class Merchant extends Component {
     this.address = React.createRef();
     this.email = React.createRef();
     this.phone = React.createRef();
+    this.username = React.createRef();
+    this.password = React.createRef();
+    this.picture = React.createRef();
   }
   
   addMerchant = (event) => {
@@ -44,6 +47,17 @@ export default class Merchant extends Component {
         <Form.Group controlId="formPhone">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
+        </Form.Group>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control type="text" placeholder="" ref={this.username}/>
+        </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control type="password" placeholder="" ref={this.password}/>
+        </Form.Group>
+        <Form.Group>
+          <Form.File id="exampleFormControlFile1" label="Upload Farm Image" />
         </Form.Group>
         </Form>
         <button onClick={this.addMerchant}>
