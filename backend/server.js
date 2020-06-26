@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const Vendor = require('./models/vendorSchema.js');
+const Item = require('./models/itemSchema.js');
+const fs = require('fs');
 
 require('dotenv').config();
 
@@ -18,11 +21,33 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+fs.readFile('farmer_entries.json', 'utf8', (err, data) => {
+    if (err) throw err;
+    farmerData = JSON.parse(data);
 
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+    Vendor.insertMany(farmerData.entries,function(err,docs){
+      if (err) {
+      console.log(err);
+      }
+      else {
+      console.log("success!");
+      }
+    });
+});
+
+fs.readFile('item_entries.json', 'utf8', (err, data) => {
+    if (err) throw err;
+    itemData = JSON.parse(data);
+
+    Item.insertMany(itemData.entries,function(err,docs){
+      if (err) {
+      console.log(err);
+      }
+      else {
+      console.log("success!");
+      }
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
