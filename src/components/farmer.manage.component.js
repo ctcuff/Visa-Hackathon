@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable , TableHeaderColumn, DeleteButton } from 'react-bootstrap-table';
+import axios from 'axios';
 
 const cellEditProp = {
   mode: 'dbclick'
@@ -163,9 +164,28 @@ export default class FarmerManage extends Component {
 
   // POST request can use this information
   handleSubmitAdd = event => {
+    event.preventDefault()
+    const databody = {
+      username: "TestPerson1",
+      price: this.state.price,
+      category: this.state.category,
+      item: this.state.itemname,
+      stock: true
+    }
+    console.log("before fetch")
+
+    axios.post('http://localhost:5000/items/create', databody)
+      .then((res) => {
+        console.log(res.data)
+      }).catch((error) => {
+        console.log(error)
+      });
+
+
+
     alert(`Name: ${this.state.itemname}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
     // this prevents the form from resetting text after submission
-    event.preventDefault()
+
   }
 
   handleSubmitEdit = event => {

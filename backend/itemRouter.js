@@ -10,7 +10,7 @@ itemRouter.get('/', async (req, res) => {
     });
 });
 
-itemRouter.post('/', async (req, res) => {
+itemRouter.post('/create', async (req, res) => {
     res.send('added:');
     const item = new Item({
       username: req.body.username,
