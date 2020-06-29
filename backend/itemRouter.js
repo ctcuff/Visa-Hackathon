@@ -10,14 +10,20 @@ itemRouter.get('/', async (req, res) => {
     });
 });
 
+itemRouter.get('/searchByFarmer', async (req, res) => {
+    Item.find({vendorUsername: req.body.vendorUsername}, function (err, data) {
+      if(err) throw err;
+      res.json(data);
+    });
+});
+
 itemRouter.post('/', async (req, res) => {
-    res.send('added:');
     const item = new Item({
       username: req.body.username,
       price: req.body.price,
       category: req.body.category,
       item: req.body.item,
-      time : req.body.time
+      inStock : req.body.inStock
     });
     console.log(item);
     item.save()
