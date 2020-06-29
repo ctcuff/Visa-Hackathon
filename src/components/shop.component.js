@@ -4,90 +4,41 @@ import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
-
-const products = [];
-const foods = [
-  'Strawberries', 
-  'Carrots',
-  'Potatoes',
-  'Lemons',
-  'Corn',
-  'Blueberries',
-  'Oranges'
-];
-
-// Create a placeholder list of products with
-// random prices, random foods, and a random in/out
-// of stock status
-for (let i = 0; i < 46; i++) {
-  const randomPrice = Math.random() * 10
-  products.push({
-    id: i,
-    name: foods[Math.floor(Math.random() * foods.length)],
-    priceString: '$' + randomPrice.toFixed(2),
-    price: randomPrice,
-    farm: `Bob ${i}`,
-    status: Math.random() >= 0.5 ? 'in stock' : 'out of stock'
-  });
-}
-
-const columns = [
-  {
-    dataField: 'id',
-    text: 'Product ID',
-    sort: true,
-    sortFunc: (a, b, order, dataField, rowA, rowB) => {
-      if (order === 'asc') {
-        return b - a;
-      }
-      return a - b; // desc
-    },
-  },
-  {
-    dataField: 'name',
-    text: 'Product Name',
-    sort: true,
-  },
-  {
-    dataField: 'price',
-    text: 'Product Price',
-    sort: true,
-  },
-  {
-    dataField: 'farm',
-    text: 'Local Farm',
-    sort: true,
-  },
-  {
-    dataField: 'status',
-    text: 'Product Status',
-  },
-];
-
-let order = 'desc';
+import axios from 'axios';
 
 export default class Shop extends Component {
-  state = {
-    selectedRowKeys: [], // Check here to configure the default column
-    loading: false,
-    total: 0
-  };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRowKeys: [], // Check here to configure the default column
+      loading: false,
+      total: 0,
+      products: [],
+      // Contains a list of rows ids that can't be selected.
+      // Any item that's not in stock can't be selected.
+      unselectable: []
+    };
+  }
 
-  start = () => {
-    this.setState({ loading: true });
-    // ajax request after empty completing
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
+  componentDidMount() {
+    axios
+      .get('http://localhost:5000/items')
+      .then(res => {
+        const outOfStockItems = [];
+
+        res.data.forEach(entry => {
+          if (!entry.inStock) {
+            outOfStockItems.push(entry._id);
+          }
+        });
+
+        this.setState({ 
+          products: res.data,
+          unselectable: outOfStockItems
+        });
       });
-    }, 1000);
-  };
-
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
+  }
 
   CellFormatter(cell, row) {
     return (<div><Link to={{
@@ -102,13 +53,27 @@ export default class Shop extends Component {
     } else {
       this.setState({ total: this.state.total - row.price })
     }
-  };
+  }; 
+
+  onSelectAllRows = (isSelected, rows) => {
+    let total = 0;
+
+    if (isSelected) {
+      rows.forEach(row => {
+        total += row.price
+      })
+    }
+
+    this.setState({ total });
+  }
 
   render() {
     const selectRowProp = {
       mode: 'checkbox',
       clickToSelect: true,
-      onSelect: this.onSelectRow
+      onSelect: this.onSelectRow,
+      onSelectAll: this.onSelectAllRows,
+      unselectable: this.state.unselectable
     };
 
     const tableOptions = {
@@ -128,26 +93,26 @@ export default class Shop extends Component {
       <div className="container shop">
         <h1 className="shop-header">Browse for groceries</h1>
         <BootstrapTable
-          data={products}
+          data={this.state.products}
           selectRow={selectRowProp}
           options={tableOptions}
+          className="shop-table"
           pagination
           hover
-          className="shop-table"
         >
-          <TableHeaderColumn dataField="id" isKey dataSort={true}>
+          <TableHeaderColumn dataField="_id" isKey dataSort={true}>
             Product ID
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="name" dataFormat={this.CellFormatter} dataSort={true}>
+          <TableHeaderColumn dataField="item" dataFormat={this.CellFormatter} dataSort={true}>
             Product Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="priceString" dataSort={true}>
+          <TableHeaderColumn dataField="price" dataSort={true}>
             Product Price
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="farm" dataSort={true}>
+          <TableHeaderColumn dataField="vendorUsername" dataSort={true}>
             Farm Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="status" dataSort={true}>
+          <TableHeaderColumn dataField="inStock" dataSort={true}>
             Product Status
           </TableHeaderColumn>
         </BootstrapTable>
