@@ -6,7 +6,7 @@ const itemSchema = new Schema({
     vendorUsername: {type: String , required: true },
     price: { type: mongoose.Number , required: true },
     category: { type: String , required: true },
-    item: {type:String, required: true},
+    item: {type: String, required: true},
     inStock : { type : Boolean }
   });
 
