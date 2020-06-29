@@ -17,7 +17,7 @@ itemRouter.post('/create', async (req, res) => {
       price: req.body.price,
       category: req.body.category,
       item: req.body.item,
-      time : req.body.time
+      inStock : req.body.inStock
     });
     console.log(item);
     item.save()
