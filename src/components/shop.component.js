@@ -2,6 +2,7 @@ import '../styles/shop.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { Link } from "react-router-dom";
 
 const products = [];
 const foods = [
@@ -93,6 +94,13 @@ export default class Shop extends Component {
     this.setState({ selectedRowKeys });
   };
 
+  CellFormatter(cell, row) {
+    return (<div><Link to={{
+      pathname: '/item',
+      query: { name: row.name, price: row.price, farm: row.farm, status: row.status }
+    }}>{cell}</Link></div>);
+  }
+
   render() {
     return (
       <div className="container shop">
@@ -108,7 +116,7 @@ export default class Shop extends Component {
           <TableHeaderColumn dataField="id" isKey dataSort={true}>
             Product ID
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="name" dataSort={true}>
+          <TableHeaderColumn dataField="name" dataFormat={this.CellFormatter} dataSort={true}>
             Product Name
           </TableHeaderColumn>
           <TableHeaderColumn dataField="price" dataSort={true}>
