@@ -5,3 +5,9 @@
 .shop {
     margin-bottom: 64px;
 }
+
+.shop-checkout {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}

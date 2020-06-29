@@ -3,6 +3,7 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 const products = [];
 const foods = [
@@ -19,10 +20,12 @@ const foods = [
 // random prices, random foods, and a random in/out
 // of stock status
 for (let i = 0; i < 46; i++) {
+  const randomPrice = Math.random() * 10
   products.push({
     id: i,
     name: foods[Math.floor(Math.random() * foods.length)],
-    price: '$' + (Math.random() * 10).toFixed(2),
+    priceString: '$' + randomPrice.toFixed(2),
+    price: randomPrice,
     farm: `Bob ${i}`,
     status: Math.random() >= 0.5 ? 'in stock' : 'out of stock'
   });
@@ -63,19 +66,11 @@ const columns = [
 
 let order = 'desc';
 
-const selectRowProp = {
-  mode: 'checkbox',
-  clickToSelect: true
-};
-
-const tableOptions = {
-  paginationPosition: 'top'
-};
-
 export default class Shop extends Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
+    total: 0
   };
 
   start = () => {
@@ -101,7 +96,34 @@ export default class Shop extends Component {
     }}>{cell}</Link></div>);
   }
 
+  onSelectRow = (row, isSelected, e) => {
+    if (isSelected) {
+      this.setState({ total: this.state.total + row.price })
+    } else {
+      this.setState({ total: this.state.total - row.price })
+    }
+  };
+
   render() {
+    const selectRowProp = {
+      mode: 'checkbox',
+      clickToSelect: true,
+      onSelect: this.onSelectRow
+    };
+
+    const tableOptions = {
+      paginationPosition: 'top'
+    };
+
+    // Lets us go to the /payment route passing in
+    // the current total as a prop to the payment component
+    const linkProps = {
+      pathname: '/payment',
+      priceProps: {
+        amount: this.state.total
+      }
+    };
+
     return (
       <div className="container shop">
         <h1 className="shop-header">Browse for groceries</h1>
@@ -119,7 +141,7 @@ export default class Shop extends Component {
           <TableHeaderColumn dataField="name" dataFormat={this.CellFormatter} dataSort={true}>
             Product Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="price" dataSort={true}>
+          <TableHeaderColumn dataField="priceString" dataSort={true}>
             Product Price
           </TableHeaderColumn>
           <TableHeaderColumn dataField="farm" dataSort={true}>
@@ -129,6 +151,12 @@ export default class Shop extends Component {
             Product Status
           </TableHeaderColumn>
         </BootstrapTable>
+        <div className="shop-checkout">
+          <h1>Total: ${this.state.total.toFixed(2)}</h1>
+            <Link to={linkProps}>
+              <Button disabled={this.state.total === 0}>Checkout</Button>
+            </Link>
+        </div>
       </div>
     );
   }
