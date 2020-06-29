@@ -54,7 +54,7 @@ export default class Navbar extends Component {
             </Form>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="/account">Account</NavDropdown.Item>
-              <NavDropdown.Item href="/Orders">Orders</NavDropdown.Item>
+              <NavDropdown.Item href="/item">Orders</NavDropdown.Item>
               <NavDropdown.Item href="/payment">Payments</NavDropdown.Item>
               <NavDropdown.Item href="/farmermanage">Item Manager</NavDropdown.Item>
               <NavDropdown.Divider />
