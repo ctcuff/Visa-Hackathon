@@ -11,7 +11,7 @@ itemRouter.get('/', async (req, res) => {
 });
 
 itemRouter.get('/searchByFarmer', async (req, res) => {
-    Item.find({vendorUsername: req.body.vendorUsername}, function (err, data) {
+    Item.find({vendorUsername: req.params.vendorUsername}, function (err, data) {
       if(err) throw err;
       res.json(data);
     });

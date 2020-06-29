@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { BootstrapTable , TableHeaderColumn, DeleteButton } from 'react-bootstrap-table';
 import axios from 'axios';
+//import DataTable from 'react-data-table-component';
 
 const cellEditProp = {
   mode: 'dbclick'
 };
 
+
 /*
-componentDidMount() {
-  axios.get('http://localhost:5000/items')
-};
-*/
-
-
 const products = [];
 products.push({
   name: 'Apples',
@@ -34,7 +30,7 @@ products.push({
   category: 'vegetable',
   inStock: true
 });
-
+*/
 
 const columns = [{
   dataField: 'id',
@@ -72,6 +68,41 @@ const selectRowProp = {
 
 
 export default class FarmerManage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: [],
+      itemname: '',
+      price: '0.00',
+      category: 'vegetable',
+      newPrice: '0.00',
+      stock: true,
+      remove: 'keep'
+    }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/items/searchByFarmer', {
+      params: {
+        vendorUsername: 'johnapple'
+      }
+    })
+    .then(res => {
+      this.setState({ products: res.data });
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+  dataTable() {
+    return this.state.products.map((data, i) => {
+      this.state.products.push(data);
+    })
+  }
+
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
@@ -96,19 +127,6 @@ export default class FarmerManage extends Component {
 
   getInitialState() {
     return ({price: "0.00"});
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      itemname: '',
-      price: '0.00',
-      category: 'vegetable',
-      newPrice: '0.00',
-      stock: true,
-      remove: 'keep'
-    }
   }
 
   handleItemnameChange = event => {
@@ -210,8 +228,8 @@ export default class FarmerManage extends Component {
 
           <div>
             <p>Browse for groceries</p>
-            <BootstrapTable selectRow={selectRow} data={ products } options={options} pagination cellEdit={cellEditProp} deleteRow>
-              <TableHeaderColumn dataField='name' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
+            <BootstrapTable selectRow={selectRow} data={ this.state.products } options={options} pagination cellEdit={cellEditProp} deleteRow>
+              <TableHeaderColumn dataField='item' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
               <TableHeaderColumn dataField='category' dataSort={ true }>Category</TableHeaderColumn>
               <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
               <TableHeaderColumn dataField='inStock' dataSort={ true }>In Stock</TableHeaderColumn>
