@@ -1,36 +1,10 @@
 import React, { Component } from 'react';
 import { BootstrapTable , TableHeaderColumn, DeleteButton } from 'react-bootstrap-table';
 import axios from 'axios';
-//import DataTable from 'react-data-table-component';
 
 const cellEditProp = {
   mode: 'dbclick'
 };
-
-
-/*
-const products = [];
-products.push({
-  name: 'Apples',
-  price: '0.50',
-  category: 'fruit',
-  inStock: true
-});
-
-products.push({
-  name: 'Bananas',
-  price: '0.50',
-  category: 'fruit',
-  inStock: true
-});
-
-products.push({
-  name: 'Carrots',
-  price: '0.50',
-  category: 'vegetable',
-  inStock: true
-});
-*/
 
 const columns = [{
   dataField: 'id',
@@ -84,22 +58,20 @@ export default class FarmerManage extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/items/searchByFarmer', {
-      params: {
-        vendorUsername: 'johnapple'
-      }
-    })
+    console.log("hello2")
+    axios.get('http://localhost:5000/items')
     .then(res => {
-      this.setState({ products: res.data });
+
+      const filteredProducts = res.data.filter(entry => {
+        return entry.vendorUsername == 'johnapple';
+      });
+
+      this.setState({
+        products: filteredProducts,
+      });
     })
     .catch(error => {
       console.log(error);
-    })
-  }
-
-  dataTable() {
-    return this.state.products.map((data, i) => {
-      this.state.products.push(data);
     })
   }
 
@@ -193,7 +165,6 @@ export default class FarmerManage extends Component {
       item: this.state.itemname,
       inStock: true
     }
-    console.log("before fetch")
 
     axios.post('http://localhost:5000/items/create', databody)
       .then((res) => {
