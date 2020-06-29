@@ -1,0 +1,13 @@
+.account {
+    margin-top: 32px;
+}
+
+.account-sign-up-container {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-sign-up-btn {
+    margin-top: 16px;
+}
