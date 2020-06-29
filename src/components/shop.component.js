@@ -42,9 +42,17 @@ export default class Shop extends Component {
   CellFormatter(cell, row) {
     return (<div><Link to={{
       pathname: '/item',
-      query: { name: row.name, price: row.price, farm: row.farm, status: row.status }
+      query: { order: row._id, name: row.item, price: row.price, farm: row.vendorUsername, status: row.inStock.toString() }
     }}>{cell}</Link></div>);
   }
+
+  VendorFormatter(cell, row) {
+    return (<div><Link to={{
+      pathname: '/farm',
+      query: { farm: row.vendorUsername }
+    }}>{cell}</Link></div>);
+  }
+
 
   onSelectRow = (row, isSelected, e) => {
     const cartItem = {

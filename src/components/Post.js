@@ -6,18 +6,27 @@ export default class Post extends Component {
         super(props);
     }
     render() {
-        const nickname = this.props.nickname;
-        const avatar = this.props.avatar;
+        const order = this.props.order;
+        const name = this.props.name;
+        const price = this.props.price;
         const image = this.props.image;
-        const caption = this.props.caption;
+        const farm = this.props.farm;
+        const status = this.props.status;
 
         return (
-          <article className="Post" ref="Post">
-                <img src={avatar} alt={nickname} />
-                  <span>{nickname}</span>
-                <img alt={caption} src={image} />
-              <strong>{nickname}</strong>{caption}
-          </article>
+          <div classname = "Product"> 
+            <article className="Post" ref="Post">
+                <ul> 
+                  <li> Order ID: {order}</li>
+                  <li> {name} </li> 
+                  <li> ${price}</li>
+                  <li> {farm} </li>
+                  <li> {status} </li>
+                </ul>
+                <img src={image} alt="../assets/Carrot.jpg" />
+            </article>
+          </div>
+          
         );
     }
 }

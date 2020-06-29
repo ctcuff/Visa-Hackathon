@@ -13,6 +13,8 @@ import FarmerManage from "./components/farmer.manage.component";
 import Customer from "./components/customer.component";
 import Payment from "./components/payment.component";
 import Item from "./components/item.component";
+import Farm from "./components/farm.component";
+
 function App() {
   return (
     <Router>
@@ -27,6 +29,7 @@ function App() {
         <Route path="/customer" component={Customer} />
         <Route path="/payment" component={Payment} />
         <Route path="/item" component={Item} />
+        <Route path="/farm" component={Farm} />
     </Router>
   );
 }
