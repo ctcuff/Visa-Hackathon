@@ -95,15 +95,16 @@ export default class FarmerManage extends Component {
             itemId: row._id,
             price: row.price
           });*/
-        console.log(row._id)
-        axios.delete("http://localhost:5000/items", {
-          params: { id: row._id }
-        }).then(response => {
-          console.log(response);
+          console.log(row._id)
+          axios.delete("http://localhost:5000/items", {
+            params: { id: row._id }
+          }).then(response => {
+            console.log(response);
+          });
         });
-      });
-      this.fetchItems()
-    }
+        this.fetchItems()
+      }
+    alert(`You're about to remove ${this.state.toDelete.length} item(s)`);
   }
 
   createCustomDeleteButton = (onClick) => {
@@ -113,8 +114,10 @@ export default class FarmerManage extends Component {
         btnContextual='btn-success'
         className='my-custom-class'
         btnGlyphicon='glyphicon-edit'
-        //onClick={ e => this.handleDeleteButtonClick(onClick) }/>
-        onClick={ e => this.handleDeleteItems(selectRow, rows) }/>
+        //onClick={ e => this.handleDeleteButtonClick(onClick) }
+        // onClick={ e => this.handleDeleteItems(selectRow, rows) }
+        onClick={() => this.handleDeleteItems()}
+        />
     );
   }
 
@@ -146,6 +149,42 @@ export default class FarmerManage extends Component {
     event.preventDefault()
   }
 
+  // Called when a single row is selected/unselected
+  onSelectRow = (row, isSelected, event) => {
+    const selectedItemId = row._id;
+
+    if (isSelected) {
+      // An item was selected so add it to the list of items to be removed
+      this.setState({
+        toDelete: this.state.toDelete.concat(selectedItemId)
+      })
+    } else {
+      // An item was unselected so remove it from the
+      // array of items to delete
+      this.setState({
+        toDelete: this.state.toDelete.filter(id => id !== selectedItemId)
+      })
+    }
+  }
+
+  // Called when all rows are selected/unselected
+  onSelectAllRows = (isSelected, rows) => {
+    const rowsSelected = [];
+
+    // If all rows were selected, mark all items for deletion.
+    if (isSelected) {
+      rows.forEach(row => {
+        rowsSelected.push(row._id);
+      })
+    }
+
+    // If all rows were unselected, the array of items
+    // to delete will be reset to an empty array
+    this.setState({
+      toDelete: rowsSelected
+    });
+  }
+
 
   render() {
     const options = {
@@ -154,7 +193,9 @@ export default class FarmerManage extends Component {
 
     const selectRowProp = {
       mode: 'checkbox',
-      clickToSelect: true  // enable click to select
+      clickToSelect: true,  // enable click to select
+      onSelect: this.onSelectRow,
+      onSelectAll: this.onSelectAllRows
     };
 
     return (
