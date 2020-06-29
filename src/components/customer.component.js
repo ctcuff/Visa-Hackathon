@@ -1,5 +1,7 @@
+import '../styles/customer.css';
 import React, { Component } from 'react';
-import {Form} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default class Customer extends Component {
   constructor(props) {
@@ -20,8 +22,7 @@ export default class Customer extends Component {
 
   render() {
     return (
-      <div>
-        <p>Customer Home page</p>
+      <div className="container customer">
         <Form>
         <Form.Group controlId="formCustomer">
           <Form.Label>Customer Name</Form.Label>
@@ -40,9 +41,13 @@ export default class Customer extends Component {
           <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
         </Form.Group>
         </Form>
-        <button onClick={this.addCustomer}>
+        <Button onClick={this.addCustomer} className="customer-sign-up-btn">
           Sign Up
-        </button>
+        </Button>
+        <div className="customer-login">
+          <span>Already have an account? {' '}</span>
+          <Link to="/account">Login</Link>
+        </div>
       </div>
     )
   }

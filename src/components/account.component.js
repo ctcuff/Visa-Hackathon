@@ -1,5 +1,6 @@
+import '../styles/account.css';
 import React, { Component } from 'react';
-import {Form} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 export default class Account extends Component {
   constructor(props) {
@@ -16,24 +17,25 @@ export default class Account extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container account">
         <Form>
-        <Form.Group controlId="formMerchant">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="First, Last" ref={this.username}/>
-        </Form.Group>
-        <Form.Group controlId="formBusiness">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="**********" ref={this.password}/>
-        </Form.Group>
+          <Form.Group controlId="formMerchant">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Username" ref={this.username}/>
+          </Form.Group>
+          <Form.Group controlId="formBusiness">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="password" ref={this.password}/>
+          </Form.Group>
         </Form>
-        <button onClick={this.signIn}>
+        <Button onClick={this.signIn} className="account-sign-up-btn">
           Log In
-        </button>
-        <p> Don't have an account?</p>
-        <a href="/merchant">Merchant Sign-Up</a>
-        <br></br>
-        <a href="/customer">Customer Sign-Up</a>
+        </Button>
+        <div className="account-sign-up-container">
+          <span> Don't have an account?</span>
+          <a href="/merchant">Merchant Sign-Up</a>
+          <a href="/customer">Customer Sign-Up</a>
+        </div>
       </div>
     )
   }

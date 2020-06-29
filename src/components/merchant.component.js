@@ -1,5 +1,7 @@
+import '../styles/merchant.css';
 import React, { Component } from 'react';
-import {Form} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default class Merchant extends Component {
   constructor(props) {
@@ -25,8 +27,7 @@ export default class Merchant extends Component {
 
   render() {
     return (
-      <div>
-        <p>Merchant Home page</p>
+      <div className="container merchant">
         <Form>
         <Form.Group controlId="formMerchant">
           <Form.Label>Merchant Name</Form.Label>
@@ -49,20 +50,24 @@ export default class Merchant extends Component {
           <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
         </Form.Group>
         <Form.Group controlId="formUsername">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder="" ref={this.username}/>
         </Form.Group>
         <Form.Group controlId="formPassword">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="" ref={this.password}/>
         </Form.Group>
         <Form.Group>
           <Form.File id="exampleFormControlFile1" label="Upload Farm Image" />
         </Form.Group>
         </Form>
-        <button onClick={this.addMerchant}>
+        <Button onClick={this.addMerchant}>
           Sign Up
-        </button>
+        </Button>
+        <div className="merchant-login">
+          <span>Already have an account? {' '}</span>
+          <Link to="/account">Login</Link>
+        </div>
       </div>
     )
   }
