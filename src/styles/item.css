@@ -28,6 +28,10 @@
   .Post-image-bg {
     background-color: #efefef;
   }
+  .Post-image {
+    width: 50px;
+    height: 100px;
+  }
   .Post-image img {
     display: block;
     width: 100%;

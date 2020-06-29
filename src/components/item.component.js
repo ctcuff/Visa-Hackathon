@@ -8,7 +8,8 @@ export default class Item extends Component {
           name: "",
           price: "",
           farm: "",
-          status: ""
+          status: "",
+          image: null
         };
     }
     componentDidMount() {
@@ -16,10 +17,14 @@ export default class Item extends Component {
                         price: this.props.location.query.price, 
                         farm: this.props.location.query.farm,
                         status: this.props.location.query.status})
+        import("../assets/" + this.props.location.query.name + ".jpg").then((image) => {
+            this.setState({ image: image.default });
+        });
     }
     render() {
         return (
-            <Post nickname={this.state.name} avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="Moving the community!" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" />
+            <Post nickname={this.state.name} avatar="../assets/${this.state.name}.jpg" 
+            caption="Moving the community!" image={this.state.image}/>
         )
     }
 }
