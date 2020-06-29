@@ -20,7 +20,7 @@ itemRouter.get('/searchByFarmer', async (req, res) => {
 
 itemRouter.post('/create', async (req, res) => {
     const item = new Item({
-      username: req.body.username,
+      vendorUsername: req.body.username,
       price: req.body.price,
       category: req.body.category,
       item: req.body.item,

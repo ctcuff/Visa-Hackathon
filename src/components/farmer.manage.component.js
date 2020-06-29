@@ -5,6 +5,7 @@ import axios from 'axios';
 const cellEditProp = {
   mode: 'dbclick'
 };
+
 /*
 componentDidMount() {
   axios.get('http://localhost:5000/items')
@@ -168,7 +169,7 @@ export default class FarmerManage extends Component {
   handleSubmitAdd = event => {
     event.preventDefault()
     const databody = {
-      username: "johnapple",
+      vendorUsername: "johnapple",
       price: this.state.price,
       category: this.state.category,
       item: this.state.itemname,
@@ -176,7 +177,7 @@ export default class FarmerManage extends Component {
     }
     console.log("before fetch")
 
-    axios.post('http://localhost:5000/items/', databody)
+    axios.post('http://localhost:5000/items/create', databody)
       .then((res) => {
         console.log(res.data)
       }).catch((error) => {
