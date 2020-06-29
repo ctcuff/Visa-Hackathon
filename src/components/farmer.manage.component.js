@@ -176,7 +176,7 @@ export default class FarmerManage extends Component {
     }
     console.log("before fetch")
 
-    axios.post('http://localhost:5000/items/create', databody)
+    axios.post('http://localhost:5000/items/', databody)
       .then((res) => {
         console.log(res.data)
       }).catch((error) => {
