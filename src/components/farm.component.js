@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Post from './Post';
 import axios from 'axios';
 
-
 export default class Farm extends Component {
     constructor(props) {
         super(props);
@@ -24,10 +23,12 @@ export default class Farm extends Component {
     render() {
         //let object = this.state.vendors.find(x => x.name === this.state.farm);
         let obj = "HI!"
-        const object = this.state.vendors[0]
+        let object = this.state.vendors.find((vendor, index) => vendor.name === this.state.farm)
         return (
             <div> 
-                <p> {obj} </p>
+                {this.state.vendors.map((vendor, index) => (
+                    <p> {vendor.name}</p>
+                ))}
                 <p> {this.state.farm}</p>
                 <h3> Three </h3>
                 <ul> 
