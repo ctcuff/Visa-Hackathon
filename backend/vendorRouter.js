@@ -11,12 +11,10 @@ vendorRouter.get('/', async (req, res) => {
 });
 
 vendorRouter.post('/', async (req, res) => {
-    res.send('added:');
     const vendor = new Vendor({
-      name: req.body.name,
+      username: req.body.username,
       company: req.body.company,
       id: req.body.id,
-      items: req.body.items,
       address: {
           street: req.body.address.street,
           city: req.body.address.city,

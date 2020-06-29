@@ -6,29 +6,33 @@ const cellEditProp = {
   mode: 'dbclick'
 };
 
+/*
+componentDidMount() {
+  axios.get('http://localhost:5000/items')
+};
+*/
+
+
 const products = [];
 products.push({
-  id: 1,
   name: 'Apples',
   price: '0.50',
   category: 'fruit',
-  status: 'in stock'
+  inStock: true
 });
 
 products.push({
-  id: 2,
   name: 'Bananas',
   price: '0.50',
   category: 'fruit',
-  status: 'out of stock'
+  inStock: true
 });
 
 products.push({
-  id: 3,
   name: 'Carrots',
   price: '0.50',
   category: 'vegetable',
-  status: 'in stock'
+  inStock: true
 });
 
 
@@ -47,18 +51,17 @@ const columns = [{
   text: 'Product Name',
   sort: true
 }, {
-  dataField: 'price',
-  text: 'Product Price',
-  sort: true
-}, {
   dataField: 'category',
   text: 'Category',
   sort: true
 }, {
-  dataField: 'status',
-  text: 'Product Status'
-}
-];
+  dataField: 'price',
+  text: 'Product Price',
+  sort: true
+}, {
+  dataField: 'inStock',
+  text: 'In Stock'
+}];
 
 let order = 'desc';
 
@@ -103,7 +106,7 @@ export default class FarmerManage extends Component {
       price: '0.00',
       category: 'vegetable',
       newPrice: '0.00',
-      stock: 'in stock',
+      stock: true,
       remove: 'keep'
     }
   }
@@ -166,11 +169,11 @@ export default class FarmerManage extends Component {
   handleSubmitAdd = event => {
     event.preventDefault()
     const databody = {
-      username: "TestPerson1",
+      vendorUsername: "johnapple",
       price: this.state.price,
       category: this.state.category,
       item: this.state.itemname,
-      stock: true
+      inStock: true
     }
     console.log("before fetch")
 
@@ -181,20 +184,13 @@ export default class FarmerManage extends Component {
         console.log(error)
       });
 
-
-
     alert(`Name: ${this.state.itemname}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
-    // this prevents the form from resetting text after submission
-
   }
 
   handleSubmitEdit = event => {
     alert(`Stock: ${this.state.stock}\nNew Price: ${this.state.newPrice}\nKeep or remove: ${this.state.remove}`)
     event.preventDefault()
   }
-
-
-
 
   render() {
 
@@ -209,25 +205,19 @@ export default class FarmerManage extends Component {
       <div className="container">
         <h1>Manage Items</h1>
 
-
         <div>
         <h3>View and Change Items</h3>
 
           <div>
             <p>Browse for groceries</p>
             <BootstrapTable selectRow={selectRow} data={ products } options={options} pagination cellEdit={cellEditProp} deleteRow>
-              <TableHeaderColumn dataField='id' isKey dataSort={ true }>Product ID</TableHeaderColumn>
-              <TableHeaderColumn dataField='name' dataSort={ true }>Product Name</TableHeaderColumn>
+              <TableHeaderColumn dataField='name' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
+              <TableHeaderColumn dataField='category' dataSort={ true }>Category</TableHeaderColumn>
               <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
-              <TableHeaderColumn dataField='status' dataSort={ true }>Product Status</TableHeaderColumn>
+              <TableHeaderColumn dataField='inStock' dataSort={ true }>In Stock</TableHeaderColumn>
             </BootstrapTable>
           </div>
-
         </div>
-
-
-
-
 
         <h3>Add Item</h3>
         <form onSubmit={this.handleSubmitAdd}>
