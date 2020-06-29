@@ -144,7 +144,7 @@ export default class Shop extends Component {
           <TableHeaderColumn dataField="price" dataSort={true}>
             Product Price
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="vendorUsername" dataSort={true}>
+          <TableHeaderColumn dataField="vendorUsername" dataFormat={this.VendorFormatter} dataSort={true}>
             Farm Name
           </TableHeaderColumn>
           <TableHeaderColumn dataField="inStock" dataSort={true}>
