@@ -10,16 +10,9 @@ itemRouter.get('/', async (req, res) => {
     });
 });
 
-itemRouter.get('/searchByFarmer', async (req, res) => {
-    Item.find({vendorUsername: req.body.vendorUsername}, function (err, data) {
-      if(err) throw err;
-      res.json(data);
-    });
-});
-
-itemRouter.post('/', async (req, res) => {
+itemRouter.post('/create', async (req, res) => {
     const item = new Item({
-      username: req.body.username,
+      vendorUsername: req.body.vendorUsername,
       price: req.body.price,
       category: req.body.category,
       item: req.body.item,
@@ -31,5 +24,36 @@ itemRouter.post('/', async (req, res) => {
         res.send(data);
     });
 });
+
+itemRouter.put('/', async (req, res) => {
+  Listing.findById(req.params._id, function (err, data) {
+    if(!req.body.price){
+      res.status(404).send({error:'Listing must have code'});
+    }
+    else if(!req.body.category){
+      res.status(404).send({error:'Listing must have category'});
+    }
+    else if(!req.body.item){
+      res.status(404).send({error:'Listing must have item name'});
+    }
+    data.price = req.body.price;
+    data.category = req.body.category;
+    data.item = req.body.item;
+    data.inStock = req.body.inStock;
+    data.save();
+    res.json(data);
+  });
+});
+
+itemRouter.delete('/', async (req, res) => {
+  Listing.findByIdAndRemove(req.params._id, function (err, data) {
+    if(err){
+      res.status(404).send({error:'Listing could not be found'});
+    };
+    console.log('removed listing')
+    res.json(data);
+  });
+});
+
 
 module.exports = itemRouter;
