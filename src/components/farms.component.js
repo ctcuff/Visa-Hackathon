@@ -13,7 +13,11 @@ export default class Farms extends Component {
     super(props)
 
     this.state = {
-      vendors: []
+      vendors: [],
+      currentLocation: {
+        lat: 0.0,
+        lng: 0.0
+      }
     };
   }
   
@@ -23,11 +27,26 @@ export default class Farms extends Component {
         this.setState({ vendors: response.data });
       })
       .catch(err => console.error(err))
+      if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          const coords = pos.coords;
+          this.setState({
+            currentLocation: {
+              lat: coords.latitude,
+              lng: coords.longitude
+            }
+          });
+        });
+      } else {
+        //todo
+      }
   }
 
   render() {
     return (
       <div>
+        <p> Latitude: {this.state.currentLocation.lat} </p> 
+        <p> Longitude: {this.state.currentLocation.lng} </p> 
         <Carousel>
         {this.state.vendors.map((vendor, index) => (
           <Carousel.Item key={index}>
