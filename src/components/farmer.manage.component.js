@@ -11,12 +11,8 @@ const cellEditProp = {
   mode: 'dbclick'
 };
 
-const selectRowProp = {
-  mode: 'checkbox',
-  clickToSelect: true  // enable click to select
-};
-
 export default class FarmerManage extends Component {
+
   constructor(props) {
     super(props);
 
@@ -26,6 +22,7 @@ export default class FarmerManage extends Component {
       price: '0.00',
       category: 'vegetable',
       inStock: true,
+      toDelete: [],
     }
   }
 
@@ -84,6 +81,31 @@ export default class FarmerManage extends Component {
     onClick();
   }
 
+  handleDeleteItems = (selectRow, rows) => {
+      //let total = 0;
+      //const toDelete = [];
+
+      // All rows were selected so add every item to the cart
+      if (selectRow) {
+        rows.forEach(row => {
+          //total += row.price;
+          /*cartItems.push({
+            itemName: row.item,
+            vendorUsername: row.vendorUsername,
+            itemId: row._id,
+            price: row.price
+          });*/
+        console.log(row._id)
+        axios.delete("http://localhost:5000/items", {
+          params: { id: row._id }
+        }).then(response => {
+          console.log(response);
+        });
+      });
+      this.fetchItems()
+    }
+  }
+
   createCustomDeleteButton = (onClick) => {
     return (
       <DeleteButton
@@ -91,7 +113,8 @@ export default class FarmerManage extends Component {
         btnContextual='btn-success'
         className='my-custom-class'
         btnGlyphicon='glyphicon-edit'
-        onClick={ e => this.handleDeleteButtonClick(onClick) }/>
+        //onClick={ e => this.handleDeleteButtonClick(onClick) }/>
+        onClick={ e => this.handleDeleteItems(selectRow, rows) }/>
     );
   }
 
@@ -123,12 +146,15 @@ export default class FarmerManage extends Component {
     event.preventDefault()
   }
 
+
   render() {
     const options = {
       deleteBtn: this.createCustomDeleteButton
     };
-    const selectRow = {
-      mode: 'checkbox'
+
+    const selectRowProp = {
+      mode: 'checkbox',
+      clickToSelect: true  // enable click to select
     };
 
     return (
@@ -141,7 +167,7 @@ export default class FarmerManage extends Component {
           </TabList>
             <TabPanel>
               <div>
-                <BootstrapTable selectRow={selectRow} data={ this.state.products } options={options} pagination cellEdit={cellEditProp} deleteRow>
+                <BootstrapTable selectRow={selectRowProp} data={ this.state.products } options={options} pagination cellEdit={cellEditProp} deleteRow>
                   <TableHeaderColumn dataField='item' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
                   <TableHeaderColumn dataField='category' dataSort={ true }>Category</TableHeaderColumn>
                   <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
