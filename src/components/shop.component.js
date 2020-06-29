@@ -11,13 +11,12 @@ export default class Shop extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRowKeys: [], // Check here to configure the default column
-      loading: false,
       total: 0,
       products: [],
       // Contains a list of rows ids that can't be selected.
       // Any item that's not in stock can't be selected.
-      unselectable: []
+      unselectable: [],
+      cart: []
     };
   }
 
@@ -48,23 +47,49 @@ export default class Shop extends Component {
   }
 
   onSelectRow = (row, isSelected, e) => {
+    const cartItem = {
+      itemName: row.item,
+      vendorUsername: row.vendorUsername,
+      itemId: row._id,
+      price: row.price
+    };
+  
     if (isSelected) {
-      this.setState({ total: this.state.total + row.price })
+      this.setState({ 
+        total: this.state.total + row.price,
+        cart: [...this.state.cart, cartItem]
+      })
     } else {
-      this.setState({ total: this.state.total - row.price })
+      // An item was unselected, so remove it from the
+      // cart by filtering it out based in the row's ID
+      this.setState({ 
+        total: this.state.total - row.price,
+        cart: this.state.cart.filter(cartItem => cartItem.itemId !== row._id)
+      })
     }
   }; 
 
   onSelectAllRows = (isSelected, rows) => {
     let total = 0;
+    const cartItems = [];
 
+    // All rows were selected so add every item to the cart
     if (isSelected) {
       rows.forEach(row => {
-        total += row.price
-      })
+        total += row.price;
+        cartItems.push({
+          itemName: row.item,
+          vendorUsername: row.vendorUsername,
+          itemId: row._id,
+          price: row.price
+        });
+      });
     }
 
-    this.setState({ total });
+    this.setState({ 
+      total,
+      cart: cartItems
+    });
   }
 
   render() {
@@ -80,12 +105,14 @@ export default class Shop extends Component {
       paginationPosition: 'top'
     };
 
-    // Lets us go to the /payment route passing in
-    // the current total as a prop to the payment component
+    // This allows us to pass in the current total
+    // and what items the user has in their cart when
+    // the /payment route is visited
     const linkProps = {
       pathname: '/payment',
-      priceProps: {
-        amount: this.state.total
+      paymentProps: {
+        total: this.state.total,
+        cart: this.state.cart
       }
     };
 

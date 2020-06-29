@@ -3,3 +3,17 @@
     justify-content: center;
     margin-top: 32px;
 }
+
+.payment {
+    margin-top: 32px;
+}
+
+.payment-total {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.payment-checkout {
+    margin: 32px 0;
+    text-align: center;
+}

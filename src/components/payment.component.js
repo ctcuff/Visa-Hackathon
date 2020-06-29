@@ -1,16 +1,17 @@
 import '../styles/payment.css';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
 
 export default class Payment extends Component {
 
   componentDidMount() {
     // Get the price that was passed from the Shop component
-    const price = this.props.location.priceProps && this.props.location.priceProps.amount;
+    const paymentProps = this.props.location.paymentProps;
 
     // Only try to checkout if a price was passed to this component
-    if (price) {
-      this.checkout(price);
+    if (paymentProps) {
+      this.checkout(paymentProps.total);
     }
   }
 
@@ -42,9 +43,9 @@ export default class Payment extends Component {
   }
 
   render() {
-    const price = this.props.location.priceProps && this.props.location.priceProps.amount;
+   const paymentProps = this.props.location.paymentProps;
 
-    if (!price) {
+    if (!paymentProps) {
       return (
         <div className="payment-empty">
           <p>
@@ -54,16 +55,38 @@ export default class Payment extends Component {
         </div>
       )
     }
-  
+
+    const { total, cart } = paymentProps;
+
     return (
-      <div>
-        <h1>Your total: ${price.toFixed(2)}</h1>
-        <img 
-          alt="Visa Checkout" 
-          class="v-button" 
-          role="button" 
-          src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"
-          />
+      <div className="container payment">
+        <h1 className="payment-total">Your total: ${total.toFixed(2)}</h1>
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Item name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map(cartItem => (
+              <tr key={cartItem.itemId}>
+                <td>{cartItem.vendorUsername}</td>
+                <td>{cartItem.itemName}</td>
+                <td>${cartItem.price.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <div className="payment-checkout">
+          <img 
+            alt="Visa Checkout" 
+            class="v-button" 
+            role="button" 
+            src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"
+            />
+        </div>
       </div>
     )
   }
