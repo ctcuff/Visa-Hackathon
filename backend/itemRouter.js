@@ -32,8 +32,8 @@ itemRouter.post('/create', async (req, res) => {
     });
 });
 
-itemRouter.put('/', async (req, res) => {
-  Listing.findById(req.params._id, function (err, data) {
+itemRouter.put('/:id', async (req, res) => {
+  Listing.findById(req.params.id, function (err, data) {
     if(!req.body.price){
       res.status(404).send({error:'Listing must have code'});
     }
@@ -52,8 +52,8 @@ itemRouter.put('/', async (req, res) => {
   });
 });
 
-itemRouter.delete('/', async (req, res) => {
-  Listing.findByIdAndRemove(req.params._id, function (err, data) {
+itemRouter.delete('/:id', async (req, res) => {
+  Listing.findByIdAndRemove(req.params.id, function (err, data) {
     if(err){
       res.status(404).send({error:'Listing could not be found'});
     };
