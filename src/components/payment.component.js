@@ -18,10 +18,10 @@ export default class Payment extends Component {
   checkout = (price) => {
     window.V.init({ 
       apikey: '...',
-      encryptionKey: '...',
+      //encryptionKey: 'InCkjiC-p6Ps8Igu4$07bd6A-/E8{d3HCHBPV6R1',
       paymentRequest: {
         currencyCode: 'USD',
-        subtotal: price.toFixed(2)
+        subtotal: price.toFixed(2),
       }
     });
 
@@ -30,17 +30,11 @@ export default class Payment extends Component {
     window.V.on('payment.error', this.onPaymentError);
   }
 
-  onPaymentSuccess = (payment) => {
-    console.log('Success', JSON.stringify(payment, null, 3));
-  }
+  onPaymentSuccess = (payment) => {alert(JSON.stringify("YOUR PAYMENT WAS SUCCESSFULLY PROCESSED")); }
 
-  onPaymentCancel = (payment) => {
-    console.log('Cancelled', JSON.stringify(payment, null, 3));
-  }
+  onPaymentCancel = (payment) => {alert(JSON.stringify("YOUR PAYMENT WAS SUCCESSFULLY CANCELLED")); }
 
-  onPaymentError = (payment) => {
-    console.log('Error', JSON.stringify(payment, null, 3));
-  }
+  onPaymentError = (payment) => {alert(JSON.stringify("PAYMENT ERROR. PLEASE TRY AGAIN")); }
 
   render() {
    const paymentProps = this.props.location.paymentProps;
