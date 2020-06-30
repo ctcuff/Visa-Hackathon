@@ -11,23 +11,32 @@ export default class Farm extends Component {
         };
     }
     componentDidMount() {
+        const farmerName = this.props.location.query.farm
         axios.get('http://localhost:5000/vendors')
           .then(response => {
-            this.setState({ vendors: response.data });
+            // this.setState({vendors: response.data})
+            const filteredProducts = response.data.filter(entry => {
+            return entry.username.toUpperCase() == farmerName.toUpperCase();
+            });
+            this.setState({ vendors: filteredProducts });
           })
-          .catch(err => console.error(err))
-        this.setState({ farm: this.props.location.query.farm})
+          .catch(err => console.error(err));
+        //this.setState({ farm: this.props.location.query.farm});
+        
         //this.setState({ selected: this.state.vendors[0]})
         //this.setState({ selected: this.state.vendors.find(x => x.name === this.state.farm)})
     }
     render() {
         //let object = this.state.vendors.find(x => x.name === this.state.farm);
-        let obj = "HI!"
-        let object = this.state.vendors.find((vendor, index) => vendor.name === this.state.farm)
+        //let object = this.state.vendors.find((vendor, index) => vendor.vendorUsername === this.state.farm)
         return (
             <div> 
                 {this.state.vendors.map((vendor, index) => (
-                    <p> {vendor.name}</p>
+                    <body> 
+                        <h1> {vendor.username} </h1>
+                        <h3> {vendor.company} </h3>
+                        <h5> {vendor.address.city}, {vendor.address.state} </h5>
+                    </body>
                 ))}
                 <p> {this.state.farm}</p>
                 <h3> Three </h3>
