@@ -34,16 +34,16 @@ itemRouter.post('/create', async (req, res) => {
     });
 });
 
-itemRouter.put('/:id', async (req, res) => {
-  Item.findById(req.params.id, function (err, data) {
+itemRouter.put('/:itemId', async (req, res) => {
+  Item.findById(req.params.itemId, function (err, data) {
     if(!req.body.price){
-      res.status(404).send({error:'Listing must have code'});
+      res.status(404).send({error:'Item must have price'});
     }
     else if(!req.body.category){
-      res.status(404).send({error:'Listing must have category'});
+      res.status(404).send({error:'Item must have category'});
     }
     else if(!req.body.item){
-      res.status(404).send({error:'Listing must have item name'});
+      res.status(404).send({error:'Item must have name'});
     }
     data.price = req.body.price;
     data.category = req.body.category;
@@ -54,12 +54,12 @@ itemRouter.put('/:id', async (req, res) => {
   });
 });
 
-itemRouter.delete('/:id', async (req, res) => {
-  Item.findByIdAndRemove(req.params.id, function (err, data) {
+itemRouter.delete('/:itemId', async (req, res) => {
+  Item.findByIdAndRemove(req.params.itemId, function (err, data) {
     if(err){
-      res.status(404).send({error:'Listing could not be found'});
+      res.status(404).send({error:'Item could not be found'});
     };
-    console.log('removed listing')
+    console.log('removed item')
     res.json(data);
   });
 });

@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.20",
+    "mongoose-unique-validator": "^2.0.3",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

@@ -1,7 +1,7 @@
 {
     "entries": [
         {
-            "username": "Joey Farm",
+            "username": "JoeysFarm",
             "company": "Joe's amazing farm good",
             "address": {
                 "street": "cool street",
@@ -11,8 +11,8 @@
             }
         },
         {
-          "username": "Old Mcdonald",
-          "company": "Had a farm",
+          "username": "OldMcDonald",
+          "company": "Old McDonald had a farm",
           "address": {
               "street": "123 Cool Street",
               "city": "Somewhere",

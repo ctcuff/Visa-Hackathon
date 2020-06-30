@@ -7,6 +7,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const vendorRouter = require('./vendorRouter.js')
 const itemRouter = require('./itemRouter.js')
+const customerRouter = require('./customerRouter.js')
 require('dotenv').config();
 
 const app = express();
@@ -27,7 +28,7 @@ connection.once('open', () => {
 })
 
 //place merchant entries into db
-fs.readFile('farmer_entries.json', 'utf8', (err, data) => {
+/*fs.readFile('farmer_entries.json', 'utf8', (err, data) => {
     if (err) throw err;
     farmerData = JSON.parse(data);
 
@@ -54,11 +55,13 @@ fs.readFile('item_entries.json', 'utf8', (err, data) => {
       console.log("success!");
       }
     });
-});
+});*/
 
 app.use('/items', itemRouter);
 
 app.use('/vendors', vendorRouter);
+
+app.use('/customers', customerRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
