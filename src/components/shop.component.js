@@ -24,6 +24,33 @@ export default class Shop extends Component {
       cart: []
     };
   }
+  componentDidUpdate(prevProps) {
+    const searchProp = this.props.location.searchProps
+
+    axios
+      .get('http://localhost:5000/items')
+      .then(res => {
+        const outOfStockItems = [];
+
+        res.data.forEach(entry => {
+          if (!entry.inStock) {
+            outOfStockItems.push(entry._id);
+          }
+        });
+        if(searchProp){
+          this.setState({ 
+            products: filterByValue(res.data, searchProp.searchTerm),
+            unselectable: filterByValue(outOfStockItems, searchProp.searchTerm)
+          });
+        } else {
+          this.setState({ 
+            products: res.data,
+            unselectable: outOfStockItems
+          });
+        }
+        
+      });
+  }
 
   componentDidMount() {
     const searchProp = this.props.location.searchProps
