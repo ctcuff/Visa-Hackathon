@@ -70,6 +70,18 @@ export default class FarmerManage extends Component {
       stock: event.target.value
     })
   }
+
+/*
+  handleUpdate = event => {
+    const updatedItem = {
+      vendorUsername: farmerName,
+      price: this.state.price,
+      category: this.state.category,
+      item: this.state.itemname,
+      inStock: true
+    }
+  }
+  */
 /*
   handleNewPriceChange = event => {
     this.setState({
@@ -78,33 +90,15 @@ export default class FarmerManage extends Component {
   }
 */
   handleDeleteButtonClick = (onClick) => {
+    this.state.toDelete.forEach(itemID => {
+      axios.delete(`http://localhost:5000/items/${itemID}`)
+        .then(response => {
+           console.log(response)
+        })
+      console.log(itemID);
+    })
+
     onClick();
-  }
-
-  handleDeleteItems = (selectRow, rows) => {
-      //let total = 0;
-      //const toDelete = [];
-
-      // All rows were selected so add every item to the cart
-      if (selectRow) {
-        rows.forEach(row => {
-          //total += row.price;
-          /*cartItems.push({
-            itemName: row.item,
-            vendorUsername: row.vendorUsername,
-            itemId: row._id,
-            price: row.price
-          });*/
-          console.log(row._id)
-          axios.delete("http://localhost:5000/items", {
-            params: { id: row._id }
-          }).then(response => {
-            console.log(response);
-          });
-        });
-        this.fetchItems()
-      }
-    alert(`You're about to remove ${this.state.toDelete.length} item(s)`);
   }
 
   createCustomDeleteButton = (onClick) => {
@@ -114,9 +108,7 @@ export default class FarmerManage extends Component {
         btnContextual='btn-success'
         className='my-custom-class'
         btnGlyphicon='glyphicon-edit'
-        //onClick={ e => this.handleDeleteButtonClick(onClick) }
-        // onClick={ e => this.handleDeleteItems(selectRow, rows) }
-        onClick={() => this.handleDeleteItems()}
+        onClick={ e => this.handleDeleteButtonClick(onClick) }
         />
     );
   }
@@ -154,8 +146,10 @@ export default class FarmerManage extends Component {
     const selectedItemId = row._id;
 
     if (isSelected) {
+      console.log(row._id)
       // An item was selected so add it to the list of items to be removed
       this.setState({
+
         toDelete: this.state.toDelete.concat(selectedItemId)
       })
     } else {
