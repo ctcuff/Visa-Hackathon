@@ -191,7 +191,8 @@ export default class Shop extends Component {
     };
 
     const tableOptions = {
-      paginationPosition: 'top'
+      paginationPosition: 'top',
+      noDataText: 'No Products Match Your Search'
     };
 
     // This allows us to pass in the current total
@@ -204,7 +205,7 @@ export default class Shop extends Component {
         cart: this.state.cart
       }
     };
-
+    
     return (
       <div className="container shop">
         <h1 className="shop-header">Browse for groceries</h1>
