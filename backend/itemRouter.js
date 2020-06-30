@@ -19,7 +19,6 @@ itemRouter.get('/searchByFarmer', async (req, res) => {
     });
 });
 
-
 itemRouter.post('/create', async (req, res) => {
     const item = new Item({
       vendorUsername: req.body.vendorUsername,
