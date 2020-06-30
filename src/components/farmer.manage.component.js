@@ -228,7 +228,7 @@ export default class FarmerManage extends Component {
 
   onCellSaved = (row, cellName, cellValue) => {
     //console.log({ row, cellName, cellValue });
-    //console.log(row._id);
+    console.log(row._id);
 
     const updatedItem = {
       vendorUsername: farmerName,
@@ -238,9 +238,11 @@ export default class FarmerManage extends Component {
       inStock: this.state.inStock,
     }
     axios.put(`http://localhost:5000/items/${row._id}`, updatedItem)
-      .then(response => {
-         console.log(response)
-    })
+      .then((res) => {
+        console.log(res.data)
+      }).catch((error) => {
+        console.log(error)
+      });
   }
 
   render() {
