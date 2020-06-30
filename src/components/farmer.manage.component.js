@@ -8,11 +8,62 @@ import 'react-tabs/style/react-tabs.css';
 const farmerName = 'johnapple'
 
 const cellEditProp = {
-  mode: 'dbclick'
+  mode: 'click'
 };
 
-export default class FarmerManage extends Component {
 
+class PriceEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.updateData = this.updateData.bind(this);
+    this.state = { price: props.defaultValue.price };
+  }
+  focus() {
+    this.refs.inputRef.focus();
+  }
+  updateData() {
+    this.props.onUpdate({ amount: this.state.price });
+  }
+  render() {
+    return (
+      <span>
+        <input
+          ref='inputRef'
+          className={ ( this.props.editorClass || '') + ' form-control editor edit-text' }
+          style={ { display: 'inline', width: '50%' } }
+          type='text'
+          value={ this.state.price }
+          onKeyDown={ this.props.onKeyDown }
+          onChange={ (ev) => { this.setState({ price: parseInt(ev.currentTarget.value, 10) }); } } />
+
+        <button
+          className='btn btn-info btn-xs textarea-save-btn'
+          onClick={ this.updateData }>
+          save
+        </button>
+      </span>
+    );
+  }
+}
+
+const createPriceEditor = (onUpdate, props) => (<PriceEditor onUpdate={ onUpdate } {...props}/>);
+/*
+// Global variables to keep track of what cell the user clicked on
+$('#sku-map-table').bootstrapTable({
+    onClickCell: function (field, value, row, $element) {
+        $rowIndex = $element.closest('tr').attr('data-index');
+        $field = field;
+    }
+});
+
+$(document).on('change', '.data-input', function(event) {
+    $new_val = $(this).val();
+    $('#sku-map-table').bootstrapTable('updateCell', {index: $rowIndex, field: $field, value: $new_val});
+});
+*/
+
+
+export default class FarmerManage extends Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +93,18 @@ export default class FarmerManage extends Component {
       console.log(error);
     })
   }
+
+  priceFormat(cell, row) {
+    console.log(cell);
+    return (
+      <div>
+
+        ${cell.toFixed(2)}
+      </div>
+    );
+  }
+
+
 
   componentDidMount() {
     this.fetchItems()
@@ -204,9 +267,9 @@ export default class FarmerManage extends Component {
               <div>
                 <BootstrapTable selectRow={selectRowProp} data={ this.state.products } options={options} pagination cellEdit={cellEditProp} deleteRow>
                   <TableHeaderColumn dataField='item' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
-                  <TableHeaderColumn dataField='category' dataSort={ true }>Category</TableHeaderColumn>
-                  <TableHeaderColumn dataField='price' dataSort={ true }>Product Price</TableHeaderColumn>
-                  <TableHeaderColumn dataField='inStock' dataSort={ true }>In Stock</TableHeaderColumn>
+                  <TableHeaderColumn dataField='category' editable={{type: 'select', options: {values: ['Vegetable', 'Fruit', 'Dairy', 'Meat', 'Other']}}}>Category</TableHeaderColumn>
+                  <TableHeaderColumn dataField='price' dataFormat={this.priceFormat} customEditor={ { getElement: createPriceEditor}}>Product Price</TableHeaderColumn>
+                  <TableHeaderColumn dataField='inStock' editable={ { type: 'select', options: { values: ['True','False'] } } }>In Stock</TableHeaderColumn>
                 </BootstrapTable>
               </div>
             </TabPanel>
@@ -235,6 +298,7 @@ export default class FarmerManage extends Component {
                     <option value="fruit">Fruit</option>
                     <option value="dairy">Dairy</option>
                     <option value="meat">Meat</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 <button type="submit">Submit</button>
