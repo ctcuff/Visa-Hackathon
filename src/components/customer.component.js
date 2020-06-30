@@ -2,6 +2,7 @@ import '../styles/customer.css';
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 export default class Customer extends Component {
   constructor(props) {
@@ -11,8 +12,8 @@ export default class Customer extends Component {
     this.email = React.createRef();
     this.phone = React.createRef();
   }
-  
-  addMerchant = (event) => {
+
+  addCustomer = (event) => {
     event.preventDefault();
     alert("You are submitting " + this.customer.current.value +
     this.address.current.value +
@@ -26,7 +27,7 @@ export default class Customer extends Component {
         <Form>
         <Form.Group controlId="formCustomer">
           <Form.Label>Customer Name</Form.Label>
-          <Form.Control type="text" placeholder="First, Last" ref={this.merchant}/>
+          <Form.Control type="text" placeholder="First, Last" ref={this.customer}/>
         </Form.Group>
         <Form.Group controlId="formAddress">
           <Form.Label>Street Address</Form.Label>
@@ -41,7 +42,7 @@ export default class Customer extends Component {
           <Form.Control type="tel" placeholder="123-123-1234" ref={this.phone}/>
         </Form.Group>
         </Form>
-        <Button onClick={this.addCustomer} className="customer-sign-up-btn">
+        <Button href="/account" onClick={this.addCustomer} className="customer-sign-up-btn">
           Sign Up
         </Button>
         <div className="customer-login">

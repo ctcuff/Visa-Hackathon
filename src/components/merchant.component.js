@@ -61,7 +61,7 @@ export default class Merchant extends Component {
           <Form.File id="exampleFormControlFile1" label="Upload Farm Image" />
         </Form.Group>
         </Form>
-        <Button onClick={this.addMerchant}>
+        <Button href="/account" onClick={this.addMerchant}>
           Sign Up
         </Button>
         <div className="merchant-login">
