@@ -1,0 +1,6 @@
+.confirmation {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    text-align: center;
+}
