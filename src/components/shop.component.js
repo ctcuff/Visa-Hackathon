@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
+function filterByValue(array, string) {
+  return array.filter(o =>
+      Object.keys(o).some(k => o[k].toString().toLowerCase().includes(string.toLowerCase())));
+}
+
 export default class Shop extends Component {
   
   constructor(props) {
@@ -21,6 +26,8 @@ export default class Shop extends Component {
   }
 
   componentDidMount() {
+    const searchProp = this.props.location.searchProps
+
     axios
       .get('http://localhost:5000/items')
       .then(res => {
@@ -31,12 +38,29 @@ export default class Shop extends Component {
             outOfStockItems.push(entry._id);
           }
         });
-
-        this.setState({ 
-          products: res.data,
-          unselectable: outOfStockItems
-        });
+        if(searchProp){
+          this.setState({ 
+            products: filterByValue(res.data, searchProp.searchTerm),
+            unselectable: filterByValue(outOfStockItems, searchProp.searchTerm)
+          });
+        } else {
+          this.setState({ 
+            products: res.data,
+            unselectable: outOfStockItems
+          });
+        }
+        
       });
+    // if (searchProp) {
+    //   this.setState({unselectable: filterByValue(this.state.unselectable, searchProp.searchTerm),
+    //                  products: filterByValue(this.state.products, searchProp.searchTerm)});
+    //   //this.searchItem(searchProp.searchTerm);
+    // }
+  }
+
+  searchItem = (keyWord) => {
+    this.setState({products : filterByValue(this.state.products, keyWord)});
+    alert("check " + keyWord);
   }
 
   CellFormatter(cell, row) {

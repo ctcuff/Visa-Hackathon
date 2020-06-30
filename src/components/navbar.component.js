@@ -28,6 +28,13 @@ export default class Navbar extends Component {
   };
 
   render() {
+    const linkProps = {
+      pathname: '/shop',
+      searchProps: {
+        searchTerm: this.state.searchValue
+      }
+    };
+    
     return (
       <BootstrapNavbar bg="dark" expand="lg" variant="dark">
         <BootstrapNavbar.Toggle />
@@ -48,9 +55,9 @@ export default class Navbar extends Component {
                 className="mr-sm-2"
                 onChange={this.handleSearchValueChange}
               />
-              <Button variant="outline-info" type="submit">
-                Search
-              </Button>
+              <Link to={linkProps}> 
+                <Button variant="outline-info" type="submit">Search</Button>
+              </Link>
             </Form>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="/account">Account</NavDropdown.Item>
