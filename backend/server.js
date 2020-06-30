@@ -27,7 +27,7 @@ connection.once('open', () => {
 })
 
 //place merchant entries into db
-fs.readFile('farmer_entries.json', 'utf8', (err, data) => {
+/*fs.readFile('farmer_entries.json', 'utf8', (err, data) => {
     if (err) throw err;
     farmerData = JSON.parse(data);
 
@@ -54,7 +54,7 @@ fs.readFile('item_entries.json', 'utf8', (err, data) => {
       console.log("success!");
       }
     });
-});
+});*/
 
 app.use('/items', itemRouter);
 
