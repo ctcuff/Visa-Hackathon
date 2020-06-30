@@ -40,17 +40,47 @@ export default class Shop extends Component {
   }
 
   CellFormatter(cell, row) {
-    return (<div><Link to={{
-      pathname: '/item',
-      query: { order: row._id, name: row.item, price: row.price, farm: row.vendorUsername, status: row.inStock.toString() }
-    }}>{cell}</Link></div>);
+    return (
+      <div>
+        <Link 
+          to={{
+            pathname: '/item',
+            query: { 
+              order: row._id, 
+              name: row.item, 
+              price: row.price, 
+              farm: row.vendorUsername, 
+              status: row.inStock.toString()
+            }
+          }}
+        >
+         {cell}
+        </Link>
+      </div>
+    );
   }
 
   VendorFormatter(cell, row) {
-    return (<div><Link to={{
-      pathname: '/farm',
-      query: { farm: row.vendorUsername }
-    }}>{cell}</Link></div>);
+    return (
+      <div>
+        <Link 
+          to={{
+            pathname: '/farm',
+            query: { farm: row.vendorUsername }
+          }}
+        >
+          {cell}
+        </Link>
+      </div>
+    );
+  }
+
+  priceFormat = (cell, row) => {
+    return (
+      <div>
+        ${cell.toFixed(2)}
+      </div>
+    );
   }
 
 
@@ -141,7 +171,7 @@ export default class Shop extends Component {
           <TableHeaderColumn dataField="item" dataFormat={this.CellFormatter} dataSort={true}>
             Product Name
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="price" dataSort={true}>
+          <TableHeaderColumn dataField="price" dataSort={true} dataFormat={this.priceFormat}>
             Product Price
           </TableHeaderColumn>
           <TableHeaderColumn dataField="vendorUsername" dataFormat={this.VendorFormatter} dataSort={true}>
