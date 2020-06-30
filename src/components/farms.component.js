@@ -5,6 +5,8 @@ import axios from 'axios';
 import Farm1 from '../assets/Farm1.jpeg';
 import Farm2 from '../assets/Farm2.jpg';
 import Farm3 from '../assets/Farm3.jpg';
+import { Link } from 'react-router-dom';
+
 
 const placeHolderImages = [Farm1, Farm2, Farm3];
 
@@ -21,6 +23,10 @@ export default class Farms extends Component {
     };
   }
   
+  browseFarmer(name) {
+    return {pathname: '/shop', searchProps: { searchTerm: name}}
+  }
+
   componentDidMount() {
     axios.get('http://localhost:5000/vendors')
       .then(response => {
@@ -56,9 +62,10 @@ export default class Farms extends Component {
                 alt={vendor.name}
               />
               <Carousel.Caption>
-                <h3>{vendor.company}</h3>
+                <h3>{vendor.username}</h3>
+                <p> {vendor.company} </p>
                 <p>{vendor.address.city}, {vendor.address.state}</p>
-                <a href="/">Browse Products</a>
+                <Link to={this.browseFarmer(vendor.username)}>Browse Products</Link>
               </Carousel.Caption>
             </Carousel.Item>
         ))}
