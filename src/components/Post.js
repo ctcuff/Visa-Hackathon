@@ -23,7 +23,7 @@ export default class Post extends Component {
                   <li> {farm} </li>
                   <li> {status} </li>
                 </ul>
-                <img src={image} alt="../assets/Carrot.jpg" />
+                <img src={image} alt="../assets/Carrot.jpg" class="responsive"/>
             </article>
           </div>
           
