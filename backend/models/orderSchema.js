@@ -10,6 +10,6 @@ const orderSchema = new Schema({
     time : { type : Date, default: Date.now }
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Order = mongoose.model('Order', orderSchema);
 
-module.exports = Item;
+module.exports = Order;

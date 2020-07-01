@@ -23,3 +23,5 @@ orderRouter.post('/create', async (req, res) => {
     console.log(order);
     order.save().then(data => {res.send(data)})
 });
+
+module.exports = orderRouter;
