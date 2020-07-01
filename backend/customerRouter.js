@@ -20,17 +20,17 @@ customerRouter.post('/signUp', async (req, res) => {
     })
 });
 
-customerRouter.get('/login', async (req, res) => {
+customerRouter.post('/login', async (req, res) => {
     Customer.findOne({username: req.body.username}, function (err, data) {
         if(!data){
           console.log('Username does not exist');
           res.status(404).send({error:'Username does not exist'});
         }
         else if(data.password != req.body.password){
-          res.send(false);
+          res.status(400).send({error: 'Invalid password'})
         }
         else if(data.password == req.body.password){
-          res.send(true);
+          res.send({status: 'ok'})
         }
     });
 });
