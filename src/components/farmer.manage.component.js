@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import '../styles/farmer.manage.css'
+import User from '../util/user.js';
 
 // Change farmer name to the username of the vendor
-const farmerName = 'johnapple'
+const farmerName = User.getUsername();
 
 class PriceEditor extends React.Component {
   constructor(props) {
