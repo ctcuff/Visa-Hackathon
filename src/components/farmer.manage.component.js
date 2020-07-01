@@ -65,10 +65,10 @@ export default class FarmerManage extends Component {
 
     this.state = {
       products: [],
-      item: '',
+      item: 'donut',
       price: '0.00',
       category: 'vegetable',
-      inStock: true,
+      inStock: "True",
       toDelete: [],
     }
   }
@@ -104,7 +104,7 @@ export default class FarmerManage extends Component {
 
   handleItemnameChange = event => {
     this.setState({
-      itemname: event.target.value
+      item: event.target.value
     })
   }
 
@@ -167,7 +167,7 @@ export default class FarmerManage extends Component {
       vendorUsername: farmerName,
       price: this.state.price,
       category: this.state.category,
-      item: this.state.itemname,
+      item: this.state.item,
       inStock: true
     }
 
@@ -179,7 +179,7 @@ export default class FarmerManage extends Component {
         console.log(error)
       });
 
-    alert(`Name: ${this.state.itemname}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
+    alert(`Name: ${this.state.item}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
   }
 
   // Allow vendor to make changes to the item name, category, price, and change whether or not the item is in stock
@@ -226,16 +226,16 @@ export default class FarmerManage extends Component {
     });
   }
 
-  onCellSaved = (row, cellName, cellValue) => {
+  onCellSaved = (row, cell) => {
     //console.log({ row, cellName, cellValue });
-    console.log(row._id);
+    console.log(row);
 
     const updatedItem = {
       vendorUsername: farmerName,
-      price: this.state.price,
-      category: this.state.category,
-      item: this.state.itemname,
-      inStock: this.state.inStock,
+      price: row.price,
+      category: row.category,
+      item: row.item,
+      inStock: row.inStock,
     }
     axios.put(`http://localhost:5000/items/${row._id}`, updatedItem)
       .then((res) => {
@@ -252,7 +252,7 @@ export default class FarmerManage extends Component {
 
     const cellEditProp = {
       mode: 'click',
-      blurToSave: true,
+      //blurToSave: true,
       afterSaveCell: this.onCellSaved
     };
 
@@ -289,7 +289,7 @@ export default class FarmerManage extends Component {
                   <label>Item name</label>
                   <input
                     type='text'
-                    value={this.state.itemname}
+                    value={this.state.item}
                     onChange={this.handleItemnameChange}
                     />
                 </div>

@@ -7,7 +7,7 @@ const itemSchema = new Schema({
     price: { type: mongoose.Number , required: true },
     category: { type: String , required: true },
     item: {type: String, required: true},
-    inStock : { type : Boolean }
+    inStock : { type : String }
   });
 
 const Item = mongoose.model('Item', itemSchema);
