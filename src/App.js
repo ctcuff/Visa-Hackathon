@@ -15,6 +15,7 @@ import Payment from "./components/payment.component";
 import Item from "./components/item.component";
 import Farm from "./components/farm.component";
 import Confirmation from "./components/confirmation.component";
+import Orders from "./components/orders.component"
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/item" component={Item} />
         <Route path="/farm" component={Farm} />
         <Route path="/confirmation" component={Confirmation} />
+        <Route path="/orders" component={Orders} />
     </Router>
   );
 }

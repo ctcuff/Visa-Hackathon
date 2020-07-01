@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  NavDropdown,
-  Nav,
-  Navbar as BootstrapNavbar,
-  Form,
-  Button,
-  FormControl,
-} from 'react-bootstrap';
+import {NavDropdown, Nav, Navbar as BootstrapNavbar, Form, Button, FormControl, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
@@ -34,7 +27,7 @@ export default class Navbar extends Component {
         searchTerm: this.state.searchValue
       }
     };
-    
+
     return (
       <BootstrapNavbar bg="dark" expand="lg" variant="dark">
         <BootstrapNavbar.Toggle />
@@ -55,13 +48,13 @@ export default class Navbar extends Component {
                 className="mr-sm-2"
                 onChange={this.handleSearchValueChange}
               />
-              <Link to={linkProps}> 
+              <Link to={linkProps}>
                 <Button variant="outline-info" type="submit">Search</Button>
               </Link>
             </Form>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="/account">Account</NavDropdown.Item>
-              <NavDropdown.Item href="/item">Orders</NavDropdown.Item>
+              <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
               <NavDropdown.Item href="/payment">Payments</NavDropdown.Item>
               <NavDropdown.Item href="/farmermanage">Item Manager</NavDropdown.Item>
               <NavDropdown.Divider />
