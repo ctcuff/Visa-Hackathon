@@ -10,6 +10,15 @@ orderRouter.get('/', async (req, res) => {
     });
 });
 
+orderRouter.get('/:vendorUsername', async (req, res) => {
+    Order.find({vendorUsername: req.params.vendorUsername }, function (err, data) {
+      if(err) throw err;
+      console.log(data);
+      res.json(data);
+
+    });
+});
+
 orderRouter.post('/create', async (req, res) => {
     const order = new Order(
         {
