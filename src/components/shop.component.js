@@ -30,6 +30,11 @@ export default class Shop extends Component {
   }
 
   componentDidMount() {
+    const farmerName =
+      this.props.location &&
+      this.props.location.searchProps &&
+      this.props.location.searchProps.farmerName;
+
     axios
       .get('http://localhost:5000/items')
       .then(res => {
@@ -41,17 +46,26 @@ export default class Shop extends Component {
           }
         });
 
-        this.setState({
-          allProducts: res.data,
-          filteredProducts: res.data,
-          unselectable: outOfStockItems
-        });
+        if (farmerName) {
+          this.setState({
+            allProducts: res.data,
+            filteredProducts: res.data.filter(entry => {
+              return entry.vendorUsername.toLowerCase().includes(farmerName.toLowerCase());
+            }),
+            unselectable: outOfStockItems
+          });
+        } else {
+          this.setState({
+            allProducts: res.data,
+            filteredProducts: res.data,
+            unselectable: outOfStockItems
+          });
+        }
       });
   }
 
   onSearchItem = (event) => {
     event.preventDefault();
-
     const searchQuery = this.searchInputRef.current.value.toLowerCase();
 
     // Find all the items the user searched for

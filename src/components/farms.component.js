@@ -71,7 +71,12 @@ export default class Farms extends Component {
   }
 
   browseFarmer(name) {
-    return {pathname: '/shop', searchProps: { searchTerm: name}}
+    return {
+      pathname: '/shop',
+      searchProps: {
+        farmerName: name
+      }
+    }
   }
 
   componentDidMount() {
@@ -116,8 +121,8 @@ export default class Farms extends Component {
         <Carousel>
         {this.state.vendors.map((vendor, index) => (
           <Carousel.Item key={index}>
-              <img 
-                className="farm-carousel-img" 
+              <img
+                className="farm-carousel-img"
                 src={placeHolderImages[index % placeHolderImages.length]}
                 alt={vendor.name}
               />
