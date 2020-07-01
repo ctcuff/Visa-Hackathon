@@ -5,6 +5,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { Link } from "react-router-dom";
 import { Button, Form, FormControl } from 'react-bootstrap';
 import axios from 'axios';
+import User from '../util/user';
 
 function filterByValue(array, string) {
   return array.filter(o =>
@@ -238,7 +239,9 @@ export default class Shop extends Component {
         <div className="shop-checkout">
           <h1>Total: ${this.state.total.toFixed(2)}</h1>
             <Link to={linkProps}>
-              <Button disabled={this.state.total === 0}>Checkout</Button>
+              <Button disabled={this.state.total === 0 || !User.isLoggedIn()}>
+                {User.isLoggedIn() ? 'Checkout' : 'Please sign in'}
+              </Button>
             </Link>
         </div>
       </div>

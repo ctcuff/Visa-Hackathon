@@ -2,8 +2,18 @@ import '../styles/payment.css';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
+import axios from 'axios';
+import User from '../util/user';
 
 export default class Payment extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false
+    };
+  }
 
   componentDidMount() {
     // Get the price that was passed from the Shop component
@@ -16,9 +26,8 @@ export default class Payment extends Component {
   }
 
   checkout = (price) => {
-    window.V.init({ 
+    window.V.init({
       apikey: '8OOJ8XZOLVVXXIMKJ49M21lwSMj14t3lfROD-Z5fbCpESAX2A',
-      //encryptionKey: 'InCkjiC-p6Ps8Igu4$07bd6A-/E8{d3HCHBPV6R1',
       paymentRequest: {
         currencyCode: 'USD',
         subtotal: price.toFixed(2),
@@ -28,18 +37,49 @@ export default class Payment extends Component {
     window.V.on('payment.success', this.onPaymentSuccess);
     window.V.on('payment.cancel', this.onPaymentCancel);
     window.V.on('payment.error', this.onPaymentError);
-
   }
 
-  onPaymentSuccess = (payment) => {alert(JSON.stringify("YOUR PAYMENT WAS SUCCESSFULLY PROCESSED")); window.location = '/confirmation'}
+  onPaymentSuccess = (payment) => {
+    this.setState({ isLoading: true });
+    this.submitOrder();
+  }
 
+  onPaymentCancel = (payment) => {
+    alert("Your payment was cancelled");
+  }
 
+  onPaymentError = (payment) => {
+    alert('There was an error processing your payment, please try again');
+    console.log('Error', JSON.stringify(payment, null, 3));
+  }
 
-  onPaymentCancel = (payment) => {alert(JSON.stringify("YOUR PAYMENT WAS SUCCESSFULLY CANCELLED")); }
+  submitOrder = () => {
+    const cart = this.props.location.paymentProps.cart;
 
+    // Add every item from the cart to the orders db
+    const requests = cart.map(cartItem => {
+      const postData = {
+        vendorUsername: cartItem.vendorUsername,
+        customerUsername: User.getUsername(),
+        totalPrice: cartItem.price,
+        listOfItems: [cartItem.itemId],
+        time: Date.now()
+      }
+      return axios.post('http://localhost:5000/orders/create', postData);
+    });
 
-
-  onPaymentError = (payment) => {alert(JSON.stringify("PAYMENT ERROR. PLEASE TRY AGAIN")); }
+    // Wait for all order db requests to finish
+    Promise
+      .all(requests)
+      .then(res => {
+        window.location = '/confirmation';
+      })
+      .catch(err => {
+        console.log(err);
+        alert('An error occurred while submitting your order');
+      })
+      .finally(() => this.setState({ isLoading: false }));
+  }
 
   render() {
    const paymentProps = this.props.location.paymentProps;
@@ -52,7 +92,7 @@ export default class Payment extends Component {
             <Link to="/shop">Go to the shop</Link>.
           </p>
         </div>
-      )
+      );
     }
 
     const { total, cart } = paymentProps;
@@ -79,14 +119,18 @@ export default class Payment extends Component {
           </tbody>
         </Table>
         <div className="payment-checkout">
-          <img 
-            alt="Visa Checkout" 
-            class="v-button" 
-            role="button" 
-            src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"
+          {this.state.isLoading ? (
+            <p>Processing your order...</p>
+          ) : (
+            <img
+              alt="Visa Checkout"
+              className="v-button"
+              role="button"
+              src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"
             />
+          )}
         </div>
       </div>
-    )
+    );
   }
 }
