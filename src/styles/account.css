@@ -9,5 +9,11 @@
 }
 
 .account-sign-up-btn {
-    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.account-type-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
