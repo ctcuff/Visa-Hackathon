@@ -1,13 +1,33 @@
 import '../styles/home.css';
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
-import agricultureImage from '../assets/agriculture.jpg';
+import agricultureImage1 from '../assets/agriculture1.jpg';
+import agricultureImage2 from '../assets/agriculture2.jpg';
+import agricultureImage3 from '../assets/agriculture3.jpg';
+import agricultureImage4 from '../assets/agriculture4.jpg';
+import agricultureImage5 from '../assets/agriculture5.jpg';
+import { Carousel } from 'react-bootstrap';
 
+const carouselImages = [agricultureImage1, 
+                        agricultureImage2, 
+                        agricultureImage3, 
+                        agricultureImage4, 
+                        agricultureImage5]
 export default class Home extends Component {
   render() {
     return (
       <div>
-        <Image src={agricultureImage} fluid className="home-landing-image" />
+        <Carousel className>
+        {carouselImages.map((image, i) => (
+          <Carousel.Item key={i}>
+              <img 
+                className="home-carousel-img" 
+                src={carouselImages[i]}
+                alt='Agriculture Image${i}'
+              />
+            </Carousel.Item>
+        ))}
+        </Carousel>
         <div className="home-container container">
           <h1 className="home-heading">Welcome to the Farmer's Market Hub</h1>
           <p className="home-text">

@@ -1,6 +1,7 @@
-.home-landing-image {
+.home-carousel-img {
     width: 100%;
-    height: 250px;
+    /* Fullscreen minus the height of the navbar */
+    height: 300px;
     object-fit: cover;
 }
 
