@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const vendorRouter = require('./vendorRouter.js')
 const itemRouter = require('./itemRouter.js')
 const customerRouter = require('./customerRouter.js')
+const locaterRouter = require('./locaterRouter.js')
 require('dotenv').config();
 
 const app = express();
@@ -58,8 +59,8 @@ fs.readFile('item_entries.json', 'utf8', (err, data) => {
 });*/
 
 app.use('/items', itemRouter);
-
 app.use('/vendors', vendorRouter);
+app.use('/locater', locaterRouter);
 
 app.use('/customers', customerRouter);
 
