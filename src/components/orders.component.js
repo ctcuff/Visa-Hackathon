@@ -27,14 +27,51 @@ export default class Orders extends Component {
       this.setState({
         orders: filteredOrders,
       });
+
+      this.state.orders.forEach((order, i) => {
+        console.log(order);
+        const orderItems = [];
+        order.listOfItems.forEach((item, j) => {
+          console.log(item);
+          axios.get(`http://localhost:5000/items/${item}`)
+          .then(res => {
+            console.log(res.data);
+            orderItems.push(res.data)
+          });
+        });
+        this.state.listItemIDs.push(orderItems);
+      });
+      console.log(this.state.listItemIDs);
     })
     .catch(error => {
       console.log(error);
     })
   }
 
+  /*fetchItemsInOrders() {
+    console.log("hello")
+    console.log(this.state.orders);
+    this.state.orders.forEach((order, i) => {
+      console.log(order);
+      const orderItems = [];
+      order.listOfItems.forEach((item, j) => {
+        console.log(item);
+        axios.get('http://localhost:5000/items/${item}')
+        .then(res => {
+          console.log(res);
+          orderItems.push(res)
+
+        });
+      });
+      this.state.listItemIDs.push(orderItems);
+    });*/
+
+
+  //}
+
   componentDidMount() {
     this.fetchOrders()
+    //this.fetchItemsInOrders()
   }
 
   render() {
@@ -49,7 +86,7 @@ export default class Orders extends Component {
            <TableHeaderColumn dataField='customerUsername'>Customer Username</TableHeaderColumn>
          </BootstrapTable>
 
-         
+
       </div>
 
     )
