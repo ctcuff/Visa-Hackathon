@@ -10,6 +10,14 @@ itemRouter.get('/', async (req, res) => {
     });
 });
 
+itemRouter.get('/:itemId', async (req, res) => {
+  console.log(req.params.itemId);
+    Item.findById(req.params.itemId, function (err, data) {
+      if(err) throw err;
+      res.json(data);
+    });
+});
+
 itemRouter.get('/searchByFarmer', async (req, res) => {
     console.log("hello")
     console.log(req.params.vendorUsername)
