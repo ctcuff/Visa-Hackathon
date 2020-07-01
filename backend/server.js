@@ -6,6 +6,7 @@ const Item = require('./models/itemSchema.js');
 const fs = require('fs');
 const vendorRouter = require('./vendorRouter.js')
 const itemRouter = require('./itemRouter.js')
+const locaterRouter = require('./locaterRouter.js')
 require('dotenv').config();
 
 const app = express();
@@ -57,9 +58,8 @@ fs.readFile('item_entries.json', 'utf8', (err, data) => {
 
 
 app.use('/items', itemRouter);
-
-
 app.use('/vendors', vendorRouter);
+app.use('/locater', locaterRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
