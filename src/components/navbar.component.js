@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NavDropdown, Nav, Navbar as BootstrapNavbar, Form, Button, FormControl, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import User from '../util/user';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -18,6 +19,13 @@ export default class Navbar extends Component {
 
   handleSearchValueChange = (event) => {
     this.setState({ searchValue: event.target.value });
+  };
+
+  logOut = () => {
+    if (window.confirm('Are you sure you want to log out?')) {
+      User.clear();
+      window.location = "/";
+    }
   };
 
   render() {
@@ -60,7 +68,11 @@ export default class Navbar extends Component {
               <NavDropdown.Divider />
               <NavDropdown.Item href="/Contact_Us">Contact Us</NavDropdown.Item>
             </NavDropdown>
-            <Link to="/account" className="nav-link">Log-In</Link>
+            {User.isLoggedIn() ? (
+              <Link to="#" className="nav-link" onClick={this.logOut}>Log-Out</Link>
+            ) : (
+              <Link to="/account" className="nav-link">Log-In</Link>
+            )}
           </Nav>
         </BootstrapNavbar.Collapse>
       </BootstrapNavbar>
