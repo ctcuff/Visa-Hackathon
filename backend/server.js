@@ -9,6 +9,7 @@ const vendorRouter = require('./vendorRouter.js')
 const itemRouter = require('./itemRouter.js')
 const customerRouter = require('./customerRouter.js')
 const locaterRouter = require('./locaterRouter.js')
+const orderRouter = require('./orderRouter.js')
 require('dotenv').config();
 
 const app = express();
@@ -61,7 +62,7 @@ fs.readFile('item_entries.json', 'utf8', (err, data) => {
 app.use('/items', itemRouter);
 app.use('/vendors', vendorRouter);
 app.use('/locater', locaterRouter);
-
+app.use('/orders', orderRouter);
 app.use('/customers', customerRouter);
 
 app.listen(port, () => {

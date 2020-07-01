@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-    company: {type: String , required: true },
-    buyer: {type: String, required: true},
-    price: { type: mongoose.Number , required: true },
-    category: { type: String , required: true },
-    item: {type:String, required: true},
+    vendorUsername: {type: String , required: true },
+    customerUsername: {type: String, required: true},
+    totalPrice: { type: mongoose.Number , required: true },
+    listOfItems: {type: Array},
     time : { type : Date, default: Date.now }
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Order = mongoose.model('Order', orderSchema);
 
-module.exports = Item;
+module.exports = Order;
