@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/payment.css';
 
 export default class Orders extends Component {
   render() {

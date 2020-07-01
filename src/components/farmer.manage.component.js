@@ -3,6 +3,7 @@ import { BootstrapTable , TableHeaderColumn, DeleteButton } from 'react-bootstra
 import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import '../styles/farmer.manage.css'
 
 // Change farmer name to the username of the vendor
 const farmerName = 'johnapple'
@@ -229,7 +230,7 @@ export default class FarmerManage extends Component {
 
     return (
       <div className="container">
-        <h1>Manage Items</h1>
+        <h1 className="farmer-heading">Manage Items</h1>
         <Tabs>
           <TabList>
             <Tab>View and Change Items</Tab>
