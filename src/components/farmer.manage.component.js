@@ -7,7 +7,6 @@ import 'react-tabs/style/react-tabs.css';
 // Change farmer name to the username of the vendor
 const farmerName = 'johnapple'
 
-
 class PriceEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -27,10 +26,11 @@ class PriceEditor extends React.Component {
           ref='inputRef'
           className={ ( this.props.editorClass || '') + ' form-control editor edit-text' }
           style={ { display: 'inline', width: '50%' } }
-          type='number'
+          type='text'
           value={ this.state.price }
           onKeyDown={ this.props.onKeyDown }
-          onChange={ (ev) => { this.setState({ price: parseInt(ev.currentTarget.value, 10) }); } } />
+          //onChange={ (ev) => { this.setState({ price: parseInt(ev.currentTarget.value, 10) }); } }
+          />
         <button
           className='btn btn-info btn-xs textarea-save-btn'
           onClick={ this.updateData }>
@@ -43,29 +43,13 @@ class PriceEditor extends React.Component {
 
 const createPriceEditor = (onUpdate, props) => (<PriceEditor onUpdate={ onUpdate } {...props}/>);
 
-/*
-// Global variables to keep track of what cell the user clicked on
-$('#sku-map-table').bootstrapTable({
-    onClickCell: function (field, value, row, $element) {
-        $rowIndex = $element.closest('tr').attr('data-index');
-        $field = field;
-    }
-});
-
-$(document).on('change', '.data-input', function(event) {
-    $new_val = $(this).val();
-    $('#sku-map-table').bootstrapTable('updateCell', {index: $rowIndex, field: $field, value: $new_val});
-});
-*/
-
-
 export default class FarmerManage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       products: [],
-      item: 'donut',
+      item: '',
       price: '0.00',
       category: 'vegetable',
       inStock: "True",
@@ -88,16 +72,7 @@ export default class FarmerManage extends Component {
       console.log(error);
     })
   }
-/*
-  priceFormat(cell, row) {
-    //console.log(cell);
-    return (
-      <div>
-        ${cell.toFixed(2)}
-      </div>
-    )
-  }
-*/
+
   componentDidMount() {
     this.fetchItems()
   }
@@ -126,16 +101,6 @@ export default class FarmerManage extends Component {
     })
   }
 
-
-
-
-/*
-  handleNewPriceChange = event => {
-    this.setState({
-      newPrice: event.target.value
-    })
-  }
-*/
   handleDeleteButtonClick = (onClick) => {
     this.state.toDelete.forEach(itemID => {
       axios.delete(`http://localhost:5000/items/${itemID}`)
@@ -144,7 +109,6 @@ export default class FarmerManage extends Component {
         })
       console.log(itemID);
     })
-
     onClick();
   }
 
@@ -256,8 +220,6 @@ export default class FarmerManage extends Component {
       afterSaveCell: this.onCellSaved
     };
 
-
-
     const selectRowProp = {
       mode: 'checkbox',
       clickToSelect: true,  // enable click to select
@@ -276,10 +238,10 @@ export default class FarmerManage extends Component {
             <TabPanel>
               <div>
                 <BootstrapTable selectRow={selectRowProp} data={ this.state.products } options={options} pagination cellEdit={cellEditProp} deleteRow>
-                  <TableHeaderColumn dataField='item' isKey={true} dataSort={ true }>Product Name</TableHeaderColumn>
-                  <TableHeaderColumn dataField='category' editable={false/*{type: 'select', options: {values: ['Vegetable', 'Fruit', 'Dairy', 'Meat', 'Other']}}*/}>Category</TableHeaderColumn>
-                  <TableHeaderColumn dataField='price' editable={true} dataFormat={this.priceFormat} customEditor={ { getElement: createPriceEditor}}>Product Price</TableHeaderColumn>
-                  <TableHeaderColumn dataField='inStock' editable={ { type: 'select', options: { values: ['True','False']}}} /*onChange={ handleStockChange }*/>In Stock</TableHeaderColumn>
+                  <TableHeaderColumn dataField='item' isKey={true}>Product Name</TableHeaderColumn>
+                  <TableHeaderColumn dataField='category' editable={{type: 'select', options: {values: ['Vegetable', 'Fruit', 'Dairy', 'Meat', 'Other']}}}>Category</TableHeaderColumn>
+                  <TableHeaderColumn dataField='price' editable={true} dataSort={true} dataFormat={this.priceFormat} customEditor={ { getElement: createPriceEditor}}>Product Price</TableHeaderColumn>
+                  <TableHeaderColumn dataField='inStock' editable={{type: 'select', options: {values: ['True','False']}}}>In Stock</TableHeaderColumn>
                 </BootstrapTable>
               </div>
             </TabPanel>
@@ -296,7 +258,7 @@ export default class FarmerManage extends Component {
                 <div>
                   <label>Price</label>
                   <input
-                    type='number' pattern='^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$'
+                    type='text' pattern='^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$'
                     value={this.state.price}
                     onChange={this.handlePriceChange}
                     />
@@ -304,14 +266,14 @@ export default class FarmerManage extends Component {
                 <div>
                   <label>Category</label>
                   <select value={this.state.category} onChange={this.handleCategoryChange} >
-                    <option value="vegetable">Vegetable</option>
-                    <option value="fruit">Fruit</option>
-                    <option value="dairy">Dairy</option>
-                    <option value="meat">Meat</option>
-                    <option value="other">Other</option>
+                    <option value="Vegetable">Vegetable</option>
+                    <option value="Fruit">Fruit</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="Submit">Submit</button>
               </form>
             </TabPanel>
         </Tabs>
