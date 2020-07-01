@@ -42,10 +42,10 @@ export default class Farms extends Component {
     const radius = this.state.radius;
 
     const postData = {
-      latitude, 
-      longitude, 
-      search, 
-      radius
+      //latitude, 
+      //longitude, 
+      name: search, 
+      //distance: radius
     };
 
     console.log(postData)
@@ -58,14 +58,19 @@ export default class Farms extends Component {
     // };
 
     axios.post('http://localhost:5000/locater/', postData)
-      .then(res => res.json())
+      //.then(res => res.json())
       .then(res => {
         if (res.error) {
           alert('Error: ' + res.error);
           return;
         }
-        console.log('hi')
-        console.log(res)
+        this.setState({ vendors: res.data})
+        console.log(res.data)
+        // axios.get('http://localhost:5000/locater/')
+        //   .then(res => {
+        //     console.log(res)
+        //   })
+        //   .catch(err => alert('Error: ' + err));
       })
       .catch(err => alert('Error: ' + err));
   }
@@ -80,11 +85,11 @@ export default class Farms extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/vendors')
-      .then(response => {
-        this.setState({ vendors: response.data });
-      })
-      .catch(err => console.error(err))
+    // axios.get('http://localhost:5000/vendors')
+    //   .then(response => {
+    //     this.setState({ vendors: response.data });
+    //   })
+    //   .catch(err => console.error(err))
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(pos => {
           const coords = pos.coords;
@@ -112,7 +117,7 @@ export default class Farms extends Component {
               onChange={this.handleRadiusValueChange}
               tooltipPlacement='top'
               min={20}
-              max={100}
+              max={10000}
             />
           </Form.Group>
           <FormControl type="text" placeholder="Franchise Example" className="mr-sm-2" onChange={this.handleSearchValueChange} />
@@ -124,13 +129,13 @@ export default class Farms extends Component {
               <img
                 className="farm-carousel-img"
                 src={placeHolderImages[index % placeHolderImages.length]}
-                alt={vendor.name}
+                alt={vendor.distance}
               />
               <Carousel.Caption>
-                <h3>{vendor.username}</h3>
-                <p> {vendor.company} </p>
-                <p>{vendor.address.city}, {vendor.address.state}</p>
-                <Link to={this.browseFarmer(vendor.username)}>Browse Products</Link>
+                <h3> {vendor.responseValues.visaStoreName} Franchise {vendor.responseValues.visaStoreId}</h3>
+                <p>{vendor.responseValues.distance}iles away</p>
+                <p> {vendor.responseValues.merchantCity}, {vendor.responseValues.merchantState}</p>
+                <Link to={this.browseFarmer(vendor.responseValues.visaStoreName)}>Browse Products</Link>
               </Carousel.Caption>
             </Carousel.Item>
         ))}
