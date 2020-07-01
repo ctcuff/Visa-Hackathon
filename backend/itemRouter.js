@@ -34,7 +34,10 @@ itemRouter.post('/create', async (req, res) => {
 
 itemRouter.put('/:itemId', async (req, res) => {
   Item.findById(req.params.itemId, function (err, data) {
-    if(!req.body.price){
+    if(err){
+      res.status(404).send({error:'Item could not be found'});
+    }
+    else if(!req.body.price){
       res.status(404).send({error:'Item must have price'});
     }
     else if(!req.body.category){
@@ -43,12 +46,14 @@ itemRouter.put('/:itemId', async (req, res) => {
     else if(!req.body.item){
       res.status(404).send({error:'Item must have name'});
     }
-    data.price = req.body.price;
-    data.category = req.body.category;
-    data.item = req.body.item;
-    data.inStock = req.body.inStock;
-    data.save();
-    res.json(data);
+    else{
+      data.price = req.body.price;
+      data.category = req.body.category;
+      data.item = req.body.item;
+      data.inStock = req.body.inStock;
+      data.save();
+      res.json(data);
+    }
   });
 });
 

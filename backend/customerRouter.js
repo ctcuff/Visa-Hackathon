@@ -12,7 +12,7 @@ customerRouter.post('/signUp', async (req, res) => {
     customer.save(function (err) {
         if(err){
           console.log(err);
-          res.send('Username is taken! Please choose different username.');
+          res.status(400).send({error:'Username is taken'});
         }
         else{
           res.send(customer);
