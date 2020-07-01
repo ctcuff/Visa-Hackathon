@@ -3,7 +3,7 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 
 function filterByValue(array, string) {
@@ -12,95 +12,79 @@ function filterByValue(array, string) {
 }
 
 export default class Shop extends Component {
-  
+
   constructor(props) {
     super(props);
+
+    this.searchInputRef = React.createRef();
     this.state = {
       total: 0,
-      products: [],
+      allProducts: [],
       // Contains a list of rows ids that can't be selected.
       // Any item that's not in stock can't be selected.
       unselectable: [],
-      cart: []
+      filteredProducts: [],
+      cart: [],
+      searchQuery: ''
     };
-  }
-  componentDidUpdate(prevProps) {
-    const searchProp = this.props.location.searchProps
-
-    axios
-      .get('http://localhost:5000/items')
-      .then(res => {
-        const outOfStockItems = [];
-
-        res.data.forEach(entry => {
-          if (!entry.inStock) {
-            outOfStockItems.push(entry._id);
-          }
-        });
-        if(searchProp){
-          this.setState({ 
-            products: filterByValue(res.data, searchProp.searchTerm),
-            unselectable: filterByValue(outOfStockItems, searchProp.searchTerm)
-          });
-        } else {
-          this.setState({ 
-            products: res.data,
-            unselectable: outOfStockItems
-          });
-        }
-        
-      });
   }
 
   componentDidMount() {
-    const searchProp = this.props.location.searchProps
-
     axios
       .get('http://localhost:5000/items')
       .then(res => {
         const outOfStockItems = [];
 
         res.data.forEach(entry => {
-          if (!entry.inStock) {
+          if (entry.inStock.toLowerCase() === 'false') {
             outOfStockItems.push(entry._id);
           }
         });
-        if(searchProp){
-          this.setState({ 
-            products: filterByValue(res.data, searchProp.searchTerm),
-            unselectable: filterByValue(outOfStockItems, searchProp.searchTerm)
-          });
-        } else {
-          this.setState({ 
-            products: res.data,
-            unselectable: outOfStockItems
-          });
-        }
-        
+
+        this.setState({
+          allProducts: res.data,
+          filteredProducts: res.data,
+          unselectable: outOfStockItems
+        });
       });
-    // if (searchProp) {
-    //   this.setState({unselectable: filterByValue(this.state.unselectable, searchProp.searchTerm),
-    //                  products: filterByValue(this.state.products, searchProp.searchTerm)});
-    //   //this.searchItem(searchProp.searchTerm);
-    // }
   }
 
-  searchItem = (keyWord) => {
-    this.setState({products : filterByValue(this.state.products, keyWord)});
-    alert("check " + keyWord);
+  onSearchItem = (event) => {
+    event.preventDefault();
+
+    const searchQuery = this.searchInputRef.current.value.toLowerCase();
+
+    // Find all the items the user searched for
+    const products = this.state.allProducts.filter(entry => {
+      return (
+        entry.item.toLowerCase().includes(searchQuery) ||
+        entry.vendorUsername.toLowerCase().includes(searchQuery)
+      );
+    });
+
+    // Find every item that's out of stock and grab its id
+    // so the table knows what can't be selected
+    const unselectable = products
+      .filter(entry => entry.inStock.toLowerCase() === 'false')
+      .map(entry => entry._id);
+
+    this.setState({
+      filteredProducts: products,
+      unselectable
+    });
   }
 
   CellFormatter(cell, row) {
     return (
       <div>
-        <Link 
+        <Link
           to={{
             pathname: '/item',
-            query: { 
-              order: row._id, 
-              name: row.item, 
-              price: row.price, 
-              farm: row.vendorUsername, 
+            query: {
+              order: row._id,
+              name: row.item,
+              price: row.price,
+              farm: row.vendorUsername,
               status: row.inStock.toString()
             }
           }}
@@ -114,7 +98,7 @@ export default class Shop extends Component {
   VendorFormatter(cell, row) {
     return (
       <div>
-        <Link 
+        <Link
           to={{
             pathname: '/farm',
             query: { farm: row.vendorUsername }
@@ -142,21 +126,21 @@ export default class Shop extends Component {
       itemId: row._id,
       price: row.price
     };
-  
+
     if (isSelected) {
-      this.setState({ 
+      this.setState({
         total: this.state.total + row.price,
-        cart: [...this.state.cart, cartItem]
+        cart: this.state.cart.concat(cartItem)
       })
     } else {
       // An item was unselected, so remove it from the
       // cart by filtering it out based in the row's ID
-      this.setState({ 
+      this.setState({
         total: this.state.total - row.price,
         cart: this.state.cart.filter(cartItem => cartItem.itemId !== row._id)
       })
     }
-  }; 
+  };
 
   onSelectAllRows = (isSelected, rows) => {
     let total = 0;
@@ -175,7 +159,7 @@ export default class Shop extends Component {
       });
     }
 
-    this.setState({ 
+    this.setState({
       total,
       cart: cartItems
     });
@@ -205,12 +189,16 @@ export default class Shop extends Component {
         cart: this.state.cart
       }
     };
-    
+
     return (
       <div className="container shop">
         <h1 className="shop-header">Browse for groceries</h1>
+        <Form inline onSubmit={this.onSearchItem}>
+          <FormControl type="text" placeholder="Product name or farm" className="mr-sm-2" ref={this.searchInputRef} />
+          <Button variant="outline-success" onClick={this.onSearchItem}>Search</Button>
+        </Form>
         <BootstrapTable
-          data={this.state.products}
+          data={this.state.filteredProducts}
           selectRow={selectRowProp}
           options={tableOptions}
           className="shop-table"
