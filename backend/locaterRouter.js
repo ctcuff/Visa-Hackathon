@@ -3,16 +3,23 @@ const mongoose = require('mongoose');
 const locaterRouter = express.Router();
 
 locaterRouter.post('/', async(req, res) => {
-    let info = req.body; // the info from frontend
+    let name = req.body.name;
+    let long = req.body.longitude;
+    let lat = req.body.latitude;
+    let results = req.body.maxRecords;
+    let dist = req.body.distance;
     // do something with getParameters()
 
     var api = require('./locater_api').merchant_locator_api;
     var authCredentials = require('./credentials.json');
     var merchant_locator_api = new api(authCredentials);
 
-    merchant_locator_api.merchantLocator(getParameters()).then(function(result){
+    merchant_locator_api.merchantLocator(getParameters(name, long, lat, results, dist)).then(function(result){
         // query visa API and return response
-        res.json(result.response);
+        let status = result.response.statusCode;
+        let ret = result.response["body"]["merchantLocatorServiceResponse"]["response"];
+        console.log(typeof(ret));
+        res.json(ret);
     }).catch((error) => {
             console.log(error);
             res.send(error);
@@ -21,7 +28,7 @@ locaterRouter.post('/', async(req, res) => {
 
 })
 
-function getParameters() {
+function getParameters(name, longitude=-121.929163, latitude=37.363922, maxRecords=5, distance=50) {
     var parameters = {
         "x-client-transaction-id": "{enter appropriate value}",
         "Accept": "application/json",
@@ -36,16 +43,16 @@ function getParameters() {
         },
         "searchOptions": {
             "matchScore": "true",
-            "maxRecords": "5",
+            "maxRecords": maxRecords,
             "matchIndicators": "true"
         },
         "searchAttrList": {
-            "distance": "50",
-            "merchantName": "Starbucks",
-            "longitude": "-121.929163",
+            "distance": distance,
+            "merchantName": name,
+            "longitude": longitude, // "-121.929163"
             "merchantCountryCode": "840",
             "distanceUnit": "M",
-            "latitude": "37.363922"
+            "latitude": latitude // "37.363922"
         }
     };
 
