@@ -5,8 +5,7 @@ import { BootstrapTable , TableHeaderColumn } from 'react-bootstrap-table';
 import axios from 'axios';
 import User from '../util/user.js';
 
-//const farmerName = User.getUsername();
-const farmerName = 'Spiderman';
+const farmerName = User.getUsername();
 
 class ItemsTable extends Component {
   constructor(props) {

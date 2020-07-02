@@ -220,11 +220,15 @@ export default class Shop extends Component {
           pagination
           hover
         >
-          <TableHeaderColumn dataField="_id" isKey dataSort={true}>
-            Product ID
+
+          <TableHeaderColumn dataField="_id" isKey dataSort={true} hidden>
+          Product ID
           </TableHeaderColumn>
           <TableHeaderColumn dataField="item" dataFormat={this.CellFormatter} dataSort={true}>
             Product Name
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField="category" dataSort={true} >
+            Category
           </TableHeaderColumn>
           <TableHeaderColumn dataField="price" dataSort={true} dataFormat={this.priceFormat}>
             Product Price
@@ -233,7 +237,7 @@ export default class Shop extends Component {
             Farm Name
           </TableHeaderColumn>
           <TableHeaderColumn dataField="inStock" dataSort={true}>
-            Product Status
+            In Stock
           </TableHeaderColumn>
         </BootstrapTable>
         <div className="shop-checkout">

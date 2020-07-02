@@ -53,7 +53,7 @@ export default class FarmerManage extends Component {
       products: [],
       item: '',
       price: '0.00',
-      category: 'vegetable',
+      category: 'Vegetable',
       inStock: "True",
       toDelete: [],
     }
@@ -134,7 +134,7 @@ export default class FarmerManage extends Component {
       price: this.state.price,
       category: this.state.category,
       item: this.state.item,
-      inStock: true
+      inStock: "True"
     }
 
     axios.post('http://localhost:5000/items/create', databody)
