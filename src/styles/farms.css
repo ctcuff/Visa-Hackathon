@@ -3,10 +3,15 @@ p {text-align: center;}
 .farm-carousel-img {
     width: 100%;
     /* Fullscreen minus the height of the navbar */
-    height: calc(100vh - 182px);
+    height: calc(100vh - 246px);
     object-fit: cover;
 }
 
 .farms-search-form {
     display: inline-block;
+}
+
+.text-center {
+    flex-direction: column;
+    text-align: center;
 }

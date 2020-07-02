@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import '../styles/farmer.manage.css'
 import User from '../util/user.js';
+import { Link } from 'react-router-dom';
 
 // Change farmer name to the username of the vendor
 const farmerName = User.getUsername();
@@ -139,10 +140,14 @@ export default class FarmerManage extends Component {
 
     axios.post('http://localhost:5000/items/create', databody)
       .then((res) => {
-        console.log(res.data)
-        this.fetchItems()
+        this.fetchItems();
+        this.setState({
+          item: '',
+          price: '0.00',
+          category: 'Vegetable'
+        });
       }).catch((error) => {
-        console.log(error)
+        console.log(error);
       });
 
     alert(`Name: ${this.state.item}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
@@ -224,10 +229,30 @@ export default class FarmerManage extends Component {
 
     const selectRowProp = {
       mode: 'checkbox',
-      clickToSelect: true,  // enable click to select
+      clickToSelect: true,
       onSelect: this.onSelectRow,
       onSelectAll: this.onSelectAllRows
     };
+
+    if (!User.isLoggedIn()) {
+      return (
+        <div className="container">
+          <p className="farmer-manage-text">
+            You need to <Link to="/account">log in first</Link>.
+          </p>
+        </div>
+      );
+    }
+
+    if (!User.isMerchant()) {
+      return (
+        <div className="container">
+          <p className="farmer-manage-text">
+            This feature is only available to merchants.
+          </p>
+        </div>
+      );
+    }
 
     return (
       <div className="container">
