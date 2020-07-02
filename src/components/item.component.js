@@ -16,14 +16,19 @@ export default class Item extends Component {
         };
     }
     componentDidMount() {
-        this.setState({ order: this.props.location.query.order,
-                        name: this.props.location.query.name,
-                        price: this.props.location.query.price, 
-                        farm: this.props.location.query.farm,
-                        status: this.props.location.query.status})
-        import("../assets/" + this.props.location.query.name + ".jpg").then((image) => {
-            this.setState({ image: image.default });
-        });
+        if(this.props.location.query !== undefined){
+            this.setState({ order: this.props.location.query.order,
+                name: this.props.location.query.name,
+                price: this.props.location.query.price, 
+                farm: this.props.location.query.farm,
+                status: this.props.location.query.status})
+            import("../assets/" + this.props.location.query.name + ".jpg").then((image) => {
+                this.setState({ image: image.default });
+            });
+        } else {
+            window.location.replace("../shop");
+        }
+        
     }
     render() {
         return (
