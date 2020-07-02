@@ -2,14 +2,16 @@ import '../styles/farms.css';
 import React, { Component, useState } from 'react';
 import { Button, Carousel, Form, FormControl, Toast } from 'react-bootstrap';
 import axios from 'axios';
-import Farm1 from '../assets/Farm1.jpeg';
+import Farm1 from '../assets/Farm1.jpg';
 import Farm2 from '../assets/Farm2.jpg';
 import Farm3 from '../assets/Farm3.jpg';
+import Farm4 from '../assets/Farm4.jpg';
+import Farm5 from '../assets/Farm5.jpg';
 import { Link } from 'react-router-dom';
 import RangeSlider from 'react-bootstrap-range-slider';
 
 
-const placeHolderImages = [Farm1, Farm2, Farm3];
+const placeHolderImages = [Farm1, Farm2, Farm3, Farm4, Farm5];
 
 export default class Farms extends Component {
   constructor(props) {
