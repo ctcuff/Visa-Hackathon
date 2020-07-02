@@ -39,7 +39,7 @@ export default class Post extends Component {
                     {farm}
                   </Link>
                 </div>
-                <h2 className="Post-status" style={{color: status === true ? "green" : "red"}}> 
+                <h2 className="Post-status" style={{color: status === 'True' ? "green" : "red"}}> 
                   In Stock: {status} 
                 </h2>
                 <p className="price"> ${price} </p>
