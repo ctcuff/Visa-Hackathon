@@ -140,10 +140,14 @@ export default class FarmerManage extends Component {
 
     axios.post('http://localhost:5000/items/create', databody)
       .then((res) => {
-        console.log(res.data)
-        this.fetchItems()
+        this.fetchItems();
+        this.setState({
+          item: '',
+          price: '0.00',
+          category: 'Vegetable'
+        });
       }).catch((error) => {
-        console.log(error)
+        console.log(error);
       });
 
     alert(`Name: ${this.state.item}\nPrice: ${this.state.price}\nCategory: ${this.state.category}`)
