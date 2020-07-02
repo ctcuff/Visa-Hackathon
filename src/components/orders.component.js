@@ -6,26 +6,45 @@ import axios from 'axios';
 import User from '../util/user.js';
 
 //const farmerName = User.getUsername();
-const farmerName = 'johnapple';
+const farmerName = 'Spiderman';
 
 class ItemsTable extends Component {
   constructor(props) {
     super(props);
-  }
-  render() {
-    if (this.props.data) {
-      console.log("hello")
-      console.log(this.props.listItemIDs)
-        return (
-          <BootstrapTable data={this.props.listItemIDs}>
-            <TableHeaderColumn dataField='item' isKey={true}>Product Name</TableHeaderColumn>
-            <TableHeaderColumn dataField='category'>Category</TableHeaderColumn>
-            <TableHeaderColumn dataField='price'>Price</TableHeaderColumn>
-          </BootstrapTable>
-        );
-    } else {
-      return (<p>?</p>);
+
+    this.state = {
+      products: []
     }
+  }
+
+  componentDidMount() {
+    const itemIds = this.props.itemIds;
+
+    console.log(JSON.stringify(itemIds, null, 3));
+
+    if (!itemIds || itemIds.length === 0) {
+      return;
+    }
+
+    itemIds.forEach(id => {
+      axios.get(`http://localhost:5000/items/${id}`)
+        .then(res => {
+          this.setState({
+            products: this.state.products.concat(res.data)
+          })
+        })
+        .catch(err => console.log(err));
+    });
+  }
+
+  render() {
+    return (
+      <BootstrapTable data={this.state.products}>
+        <TableHeaderColumn dataField='item' isKey={true}>Product Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='category'>Category</TableHeaderColumn>
+        <TableHeaderColumn dataField='price'>Price</TableHeaderColumn>
+      </BootstrapTable>
+    );
   }
 }
 
@@ -46,55 +65,33 @@ export default class Orders extends Component {
 
   expandComponent(row) {
     return (
-      <ItemsTable data={ row.expand } />
+      <ItemsTable itemIds={row.listOfItems} />
     );
   }
 
+  expandColumnComponent({ isExpandableRow, isExpanded }) {
+    let content = '';
+
+    if (isExpandableRow) {
+      content = (isExpanded ? '(-)' : '(+)' );
+    } else {
+      content = ' ';
+    }
+    return (
+      <div> { content } </div>
+    );
+  }
 
   fetchOrders() {
-    axios.get('http://localhost:5000/orders')
+    axios.get(`http://localhost:5000/orders/${farmerName}`)
     .then(res => {
-      const filteredOrders = res.data.filter(entry => {
-        return entry.vendorUsername == farmerName;
-      });
-
       this.setState({
-        orders: filteredOrders,
+        orders: res.data,
       });
-
-      this.state.orders.forEach((order, i) => {
-        //console.log(order);
-
-        order.listOfItems.forEach((item, j) => {
-          //console.log(item);
-          axios.get(`http://localhost:5000/items/${item}`)
-          .then(res => {
-            //console.log(res.data);
-            this.setState({
-              orderItems: this.state.orderItems.concat(res.data)
-            })
-            //orderItems.push(res.data)
-          });
-        });
-        this.setState({
-          listItemsIDs: this.state.listItemIDs.concat(this.state.orderItems)
-        })
-        //this.state.listItemIDs.concat(orderItems);
-      });
-      /*console.log("first hello")
-      console.log(this.state.listItemIDs);
-      /*this.setState({
-        listItemIDs: this.state.listItemIDs,
-      });*/
-
-
     })
     .catch(error => {
       console.log(error);
     })
-    console.log("hello again")
-    console.log(this.state.listItemIDs);
-
   }
 
   componentDidMount() {
@@ -102,37 +99,26 @@ export default class Orders extends Component {
   }
 
   render() {
-
     const options = {
       expandRowBgColor: 'rgb(222, 237, 255)'
     };
 
-
     return (
-
-
       <div class="container">
-        <div>
-        <ItemsTable listItemIDs={this.state.listItemIDs}/>
-        </div>
-       <h1 className="orders-heading">Orders</h1>
-
+      <h1 className="orders-heading">Orders</h1>
          <BootstrapTable data={ this.state.orders } options={options} expandableRow={this.isExpandableRow}
-        expandComponent={this.expandComponent} expandColumnOptions={{expandColumnVisible: true}}>
+         expandComponent={this.expandComponent} expandComponent={ this.expandComponent }
+         expandColumnOptions={ {
+          expandColumnVisible: true,
+          expandColumnComponent: this.expandColumnComponent,
+          columnWidth: 50
+        }}>
            <TableHeaderColumn dataField='_id' isKey={true}>Order ID</TableHeaderColumn>
            <TableHeaderColumn dataField='time'>Time</TableHeaderColumn>
            <TableHeaderColumn dataField='totalPrice'>Total Price</TableHeaderColumn>
            <TableHeaderColumn dataField='customerUsername'>Customer Username</TableHeaderColumn>
          </BootstrapTable>
-
-         <BootstrapTable data={this.state.listItemIDs}>
-           <TableHeaderColumn dataField='item' isKey={true}>Product Name</TableHeaderColumn>
-           <TableHeaderColumn dataField='category'>Category</TableHeaderColumn>
-           <TableHeaderColumn dataField='price'>Price</TableHeaderColumn>
-         </BootstrapTable>
-
       </div>
-
     )
   }
 }
