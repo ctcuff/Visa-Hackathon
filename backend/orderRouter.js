@@ -10,7 +10,7 @@ orderRouter.get('/', async (req, res) => {
     });
 });
 
-orderRouter.get('vendor/:vendorUsername', async (req, res) => {
+orderRouter.get('/vendor/:vendorUsername', async (req, res) => {
     Order.find({vendorUsername: req.params.vendorUsername }, function (err, data) {
       if(err) throw err;
       console.log(data);
@@ -19,7 +19,7 @@ orderRouter.get('vendor/:vendorUsername', async (req, res) => {
     });
 });
 
-orderRouter.get('customer/:customerUsername', async (req, res) => {
+orderRouter.get('/customer/:customerUsername', async (req, res) => {
     Order.find({customerUsername: req.params.customerUsername }, function (err, data) {
       if(err) throw err;
       console.log(data);
