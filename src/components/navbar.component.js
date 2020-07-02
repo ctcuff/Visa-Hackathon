@@ -51,7 +51,6 @@ export default class Navbar extends Component {
           <Nav>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
-              <NavDropdown.Item href="/payment">Payments</NavDropdown.Item>
               <NavDropdown.Item href="/farmermanage">Item Manager</NavDropdown.Item>
             </NavDropdown>
             {User.isLoggedIn() ? (
