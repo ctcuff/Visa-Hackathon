@@ -39,6 +39,9 @@ export default class Post extends Component {
                     {farm}
                   </Link>
                 </div>
+                <div className="Post-caption">
+                  <strong> {name}</strong>
+                </div>
                 <h2 className="Post-status" style={{color: status === 'True' ? "green" : "red"}}> 
                   In Stock: {status} 
                 </h2>
@@ -48,9 +51,6 @@ export default class Post extends Component {
                   <div className="Post-image-bg">
                     <img src={image} alt="Product Image" class="responsive"/>
                   </div>    
-                </div>
-                <div className="Post-caption">
-                  <strong> {name}</strong>
                 </div>
                 <div className="Post-stars">
                   <StarRatings
