@@ -50,12 +50,9 @@ export default class Navbar extends Component {
           </Nav>
           <Nav>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/account">Account</NavDropdown.Item>
               <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
               <NavDropdown.Item href="/payment">Payments</NavDropdown.Item>
               <NavDropdown.Item href="/farmermanage">Item Manager</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/Contact_Us">Contact Us</NavDropdown.Item>
             </NavDropdown>
             {User.isLoggedIn() ? (
               <Link to="#" className="nav-link" onClick={this.logOut}>Log-Out</Link>
