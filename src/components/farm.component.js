@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import Post from './Post';
 import axios from 'axios';
+import '../styles/farm.css';
+import Farm1 from '../assets/Farm1.jpg';
+import Farm2 from '../assets/Farm2.jpg';
+import Farm3 from '../assets/Farm3.jpg';
+import Farm4 from '../assets/Farm4.jpg';
+import Farm5 from '../assets/Farm5.jpg';
+import StarRatings from 'react-star-ratings';
+import { Button, Form } from 'react-bootstrap';
+
+
+const arrImages = [Farm1, Farm2, Farm3, Farm4, Farm5];
 
 export default class Farm extends Component {
     constructor(props) {
@@ -25,29 +36,63 @@ export default class Farm extends Component {
       } else {
         window.location.replace("../shop");
       }
-        //this.setState({ farm: this.props.location.query.farm});
-
-        //this.setState({ selected: this.state.vendors[0]})
-        //this.setState({ selected: this.state.vendors.find(x => x.name === this.state.farm)})
     }
+
+    changeRating( newRating, name ) {
+      alert("Rating functionality yet to come! You rated product: " + newRating + " stars.")
+    }
+    
+    onComment = (event) => {
+      event.preventDefault();
+      alert("Comment functionality yet to come! We will make sure to let our farmers know what you think!")
+    }
+    
     render() {
+        const randomstars = (Math.random() * (5.00))
+        const randomNum = Math.floor(Math.random() * arrImages.length)
         //let object = this.state.vendors.find(x => x.name === this.state.farm);
         //let object = this.state.vendors.find((vendor, index) => vendor.vendorUsername === this.state.farm)
         return (
             <div className="container">
+              <article className="Post" ref="Post">
                 {this.state.vendors.map((vendor, index) => (
                     <body>
-                        <h2> {vendor.username} </h2>
-                        <h3> {vendor.company} </h3>
-                        <h5> {vendor.address.city}, {vendor.address.state} </h5>
+                        <div className="Farmer-info"> 
+                          <h1> {vendor.username} </h1>
+                          <h3> {vendor.company} </h3>
+                          <h5> {vendor.address.city}, {vendor.address.state} </h5>
+                        </div>
                     </body>
                 ))}
                 <p> {this.state.farm}</p>
-                <h3> Three </h3>
-                <ul>
-                    <li> One </li>
-                    <li> Two </li>
-                </ul>
+                <div className="Farmer-image"> 
+                  <div className="Farmer-img-bg"> 
+                    <img
+                    className="farm-img"
+                    src={arrImages[randomNum]}
+                    alt={"Image of Farm"}
+                  />
+                  </div>
+                </div>
+                <div className="Farmer-stars">
+                  <StarRatings
+                    rating={randomstars}
+                    starRatedColor="blue"
+                    changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name='rating'
+                  />
+                </div>
+                <div className="Farmer-comment">
+                <Form> 
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Leave a comment!</Form.Label>
+                    <Form.Control as="textarea" rows="3" />
+                  </Form.Group>
+                  <Button onClick={this.onComment}> Submit </Button>
+                </Form>
+                </div>
+              </article>
             </div>
         )
     }
