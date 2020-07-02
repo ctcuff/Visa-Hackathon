@@ -77,10 +77,12 @@ export default class Farm extends Component {
                 <div className="Farmer-stars">
                   <StarRatings
                     rating={randomstars}
-                    starRatedColor="blue"
+                    starRatedColor="black"
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name='rating'
+                    starDimension="25px"
+                    starSpacing="10px"
                   />
                 </div>
                 <div className="Farmer-comment">
