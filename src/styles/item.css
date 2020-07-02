@@ -29,19 +29,29 @@
     background-color: #efefef;
   }
   .Post-image {
-    width: 50px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .Post-image img {
     display: block;
     width: 100%;
   }
+  .Post-farmer {
+    text-align: center;
+    font-size: 30px;
+  }
   .Post-caption {
     padding: 16px 16px;
+    text-align: center;
   }
   .Post-caption strong {
     font-family: 'PT Sans', sans-serif;
     font-weight: bold;
+  }
+  .Post-status {
+    text-align: center;
   }
   .vjs-fade-out {
     display: none;
@@ -53,3 +63,10 @@
     max-width: 100%;
     height: auto;
   }
+
+  .price {
+    color: grey;
+    font-size: 22px;
+    text-align: center;
+  }
+  

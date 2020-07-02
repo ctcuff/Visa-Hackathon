@@ -1,6 +1,12 @@
+p {text-align: center;}
+
 .farm-carousel-img {
     width: 100%;
     /* Fullscreen minus the height of the navbar */
     height: calc(100vh - 182px);
     object-fit: cover;
+}
+
+.farms-search-form {
+    display: inline-block;
 }

@@ -36,7 +36,7 @@ export default class Item extends Component {
     render() {
         return (
             <Post order = {this.state.order} name={this.state.name} price={this.state.price} farm={this.state.farm}
-            caption="Moving the community!" status={this.state.status} image={this.state.image} />
+            status={this.state.status} image={this.state.image} />
         )
     }
 }
