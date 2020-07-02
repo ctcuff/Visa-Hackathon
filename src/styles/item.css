@@ -50,7 +50,6 @@
   }
   .Post-caption strong {
     font-family: 'PT Sans', sans-serif;
-    font-weight: bold;
   }
   .Post-status {
     text-align: center;
@@ -58,6 +57,7 @@
   }
   .Post-stars {
     text-align: center;
+
   }
   .Post-comment {
     text-align: center;

@@ -59,6 +59,8 @@ export default class Post extends Component {
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name='rating'
+                    starDimension="25px"
+                    starSpacing="10px"
                   />
                 </div>
                 <div className="Post-comment">
