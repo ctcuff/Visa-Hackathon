@@ -31,7 +31,7 @@ export default class TeamPage extends Component {
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={alecImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
                       <h5 className="mb-0">Alec Chen</h5><span className="small text-muted">University of California Irvine - Computer Science</span>
                   </div>
               </div>
@@ -40,7 +40,7 @@ export default class TeamPage extends Component {
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={cameronImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
                       <h5 className="mb-0">Cameron Cuff</h5><span className="small text-muted">University of Central Florida - Computer Science</span>
                   </div>
               </div>
@@ -49,7 +49,7 @@ export default class TeamPage extends Component {
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={jeffreyImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
                       <h5 className="mb-0">Jeffrey Huang</h5><span className="small text-muted">University of Chicago - Computer Science and Math</span>
                   </div>
               </div>
@@ -60,8 +60,8 @@ export default class TeamPage extends Component {
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={ellynImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
-                      <h5 className="mb-0">Ellyn Liu</h5><span class="small text-muted">University of Chicago - Computer Science and Music</span>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
+                      <h5 className="mb-0">Ellyn Liu</h5><span className="small text-muted">University of Chicago - Computer Science and Music</span>
                   </div>
               </div>
 
@@ -78,7 +78,7 @@ export default class TeamPage extends Component {
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={andreImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
                       <h5 className="mb-0">Andre Ruiz</h5><span className="small text-muted">Mentor</span>
                   </div>
               </div>

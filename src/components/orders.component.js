@@ -131,7 +131,7 @@ export default class Orders extends Component {
     }
 
     return (
-      <div class="container">
+      <div className="container">
       <h1 className="orders-heading">Orders</h1>
          <BootstrapTable 
           data={this.state.orders} 
