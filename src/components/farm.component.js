@@ -11,7 +11,8 @@ export default class Farm extends Component {
         };
     }
     componentDidMount() {
-        const farmerName = this.props.location.query.farm
+      const farmerName = this.props.location.query.farm
+      if (farmerName) {
         axios.get('http://localhost:5000/vendors')
           .then(response => {
             // this.setState({vendors: response.data})
@@ -21,8 +22,11 @@ export default class Farm extends Component {
             this.setState({ vendors: filteredProducts });
           })
           .catch(err => console.error(err));
+      } else {
+        window.location.replace("../shop");
+      }
         //this.setState({ farm: this.props.location.query.farm});
-        
+
         //this.setState({ selected: this.state.vendors[0]})
         //this.setState({ selected: this.state.vendors.find(x => x.name === this.state.farm)})
     }
@@ -30,17 +34,17 @@ export default class Farm extends Component {
         //let object = this.state.vendors.find(x => x.name === this.state.farm);
         //let object = this.state.vendors.find((vendor, index) => vendor.vendorUsername === this.state.farm)
         return (
-            <div> 
+            <div class="container">
                 {this.state.vendors.map((vendor, index) => (
-                    <body> 
-                        <h1> {vendor.username} </h1>
+                    <body>
+                        <h2> {vendor.username} </h2>
                         <h3> {vendor.company} </h3>
                         <h5> {vendor.address.city}, {vendor.address.state} </h5>
                     </body>
                 ))}
                 <p> {this.state.farm}</p>
                 <h3> Three </h3>
-                <ul> 
+                <ul>
                     <li> One </li>
                     <li> Two </li>
                 </ul>
