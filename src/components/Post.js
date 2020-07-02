@@ -42,9 +42,9 @@ export default class Post extends Component {
                 <div className="Post-caption">
                   <strong> {name}</strong>
                 </div>
-                <h2 className="Post-status" style={{color: status === 'True' ? "green" : "red"}}> 
+                <div className="Post-status" style={{color: status === 'True' ? "green" : "red"}}> 
                   In Stock: {status} 
-                </h2>
+                </div>
                 <p className="price"> ${price} </p>
                 
                 <div className="Post-image"> 
