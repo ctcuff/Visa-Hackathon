@@ -14,10 +14,10 @@ export default class TeamPage extends Component {
     return (
 
       <div className="container">
-        <div className="text-center">
+        <div className="about-text-center">
           <h1 className="about-heading">Our Team</h1>
         </div>
-          <div className="row text-center">
+          <div className="row about-text-center">
 
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">
@@ -55,7 +55,7 @@ export default class TeamPage extends Component {
               </div>
           </div>
 
-          <div className="row text-center">
+          <div className="row about-text-center">
 
               <div className="col-xl-3 col-sm-6 mb-5">
                   <div className="bg-white rounded shadow-sm py-5 px-4">

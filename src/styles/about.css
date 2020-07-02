@@ -4,6 +4,10 @@
     text-align: center;
 }
 
+.about-text-center {
+    text-align: center;
+}
+
 .row {
     justify-content: center;
 }
