@@ -7,6 +7,7 @@ import alecImage from '../assets/alec.png';
 import cameronImage from '../assets/cameron.jpg';
 import nicolasImage from '../assets/nicolas.jpeg';
 import monicaImage from '../assets/monica.jpg';
+import andreImage from '../assets/andre.jpeg';
 
 export default class TeamPage extends Component {
   render() {
@@ -75,7 +76,8 @@ export default class TeamPage extends Component {
 
 
               <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://images.squarespace-cdn.com/content/v1/55fc0004e4b069a519961e2d/1442590746571-RPGKIXWGOO671REUNMCB/ke17ZwdGBToddI8pDm48kKVo6eXXpUnmuNsFtLxYNDVZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7abfyk2s94xLLkDA7TSo2rckMlGDU48FfF-V7lLcSuGNU_Uf7d6wOiJwP-LWX64gbQ/image-asset.gif"
+                  <div class="bg-white rounded shadow-sm py-5 px-4">
+                  <img src={andreImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
                       <h5 class="mb-0">Andre Ruiz</h5><span class="small text-muted">Mentor</span>
                   </div>
