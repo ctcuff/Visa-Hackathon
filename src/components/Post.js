@@ -27,7 +27,7 @@ export default class Post extends Component {
         const randomstars = (Math.random() * (5.00))
         console.log(randomstars)
         return (
-          <div classname = "Product"> 
+          <div className = "Product"> 
             <article className="Post" ref="Post">
                 <div className="Post-farmer"> 
                   <Link 

@@ -127,7 +127,7 @@ export default class Farms extends Component {
       <div>
         <p> Due to the limitations of data in Sandbox, we fix the Merchant Locator query to a 50 mile radius of the San Francisco Area </p>
         <p> We recommend searching "Starbucks" </p>
-        <Form classname="text-center" inline onSubmit={this.queryMerchants}>
+        <Form className="text-center" inline onSubmit={this.queryMerchants}>
           <Form.Label>
             Customize Search Radius
           </Form.Label>

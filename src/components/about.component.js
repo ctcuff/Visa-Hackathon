@@ -13,73 +13,73 @@ export default class TeamPage extends Component {
   render() {
     return (
 
-      <div class="container">
-        <div class="text-center">
+      <div className="container">
+        <div className="text-center">
           <h1 className="about-heading">Our Team</h1>
         </div>
-          <div class="row text-center">
+          <div className="row text-center">
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={monicaImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
-                      <h5 class="mb-0">Monica Boomgaarden</h5><span class="small text-muted">University of Colorado Boulder - Applied Computer Science</span>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
+                      <h5 className="mb-0">Monica Boomgaarden</h5><span className="small text-muted">University of Colorado Boulder - Applied Computer Science</span>
                   </div>
               </div>
 
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={alecImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-                      <h5 class="mb-0">Alec Chen</h5><span class="small text-muted">University of California Irvine - Computer Science</span>
+                      <h5 className="mb-0">Alec Chen</h5><span className="small text-muted">University of California Irvine - Computer Science</span>
                   </div>
               </div>
 
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={cameronImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-                      <h5 class="mb-0">Cameron Cuff</h5><span class="small text-muted">University of Central Florida - Computer Science</span>
+                      <h5 className="mb-0">Cameron Cuff</h5><span className="small text-muted">University of Central Florida - Computer Science</span>
                   </div>
               </div>
 
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={jeffreyImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-                      <h5 class="mb-0">Jeffrey Huang</h5><span class="small text-muted">University of Chicago - Computer Science and Math</span>
+                      <h5 className="mb-0">Jeffrey Huang</h5><span className="small text-muted">University of Chicago - Computer Science and Math</span>
                   </div>
               </div>
           </div>
 
-          <div class="row text-center">
+          <div className="row text-center">
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={ellynImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
-                      <h5 class="mb-0">Ellyn Liu</h5><span class="small text-muted">University of Chicago - Computer Science and Music</span>
+                      <h5 className="mb-0">Ellyn Liu</h5><span class="small text-muted">University of Chicago - Computer Science and Music</span>
                   </div>
               </div>
 
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={nicolasImage}
-                  alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-                      <h5 class="mb-0">Nicolas Molano</h5><span class="small text-muted">University of Florida - Computer Engineering</span>
+                  alt="" width="100" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
+                      <h5 className="mb-0">Nicolas Molano</h5><span className="small text-muted">University of Florida - Computer Engineering</span>
                   </div>
               </div>
 
 
-              <div class="col-xl-3 col-sm-6 mb-5">
-                  <div class="bg-white rounded shadow-sm py-5 px-4">
+              <div className="col-xl-3 col-sm-6 mb-5">
+                  <div className="bg-white rounded shadow-sm py-5 px-4">
                   <img src={andreImage}
                   alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/>
-                      <h5 class="mb-0">Andre Ruiz</h5><span class="small text-muted">Mentor</span>
+                      <h5 className="mb-0">Andre Ruiz</h5><span className="small text-muted">Mentor</span>
                   </div>
               </div>
             </div>
