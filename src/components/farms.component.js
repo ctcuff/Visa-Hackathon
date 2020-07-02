@@ -36,6 +36,9 @@ export default class Farms extends Component {
   
   queryMerchants = (event) => {
     event.preventDefault();
+    alert("Your search is for " + this.state.searchValue + " in a radius of " + this.state.radius 
+          + " miles of \nLatitude: " + this.state.currentLocation.lat.toFixed(2) 
+          + "\nLongitude: " + this.state.currentLocation.lng.toFixed(2))
     const latitude = this.state.currentLocation.lat;
     const longitude = this.state.currentLocation.lng;
     const search = this.state.searchValue;
@@ -106,18 +109,28 @@ export default class Farms extends Component {
   }
 
   render() {
+    const styles = {
+      center: {
+        marginLeft: "auto",
+        marginRight: "auto"
+      }
+    }
+
     return (
       <div>
-        <p> Latitude: {this.state.currentLocation.lat} </p> 
-        <p> Longitude: {this.state.currentLocation.lng} </p> 
-        <Form inline onSubmit={this.queryMerchants}>
+        <p> Due to the limitations of data in Sandbox, we fix the Merchant Locator query to a 50 mile radius of the San Francisco Area </p>
+        <p> We recommend searching "Starbucks" </p>
+        <Form classname="text-center" inline onSubmit={this.queryMerchants}>
+          <Form.Label>
+            Customize Search Radius
+          </Form.Label>
           <Form.Group> 
             <RangeSlider
               value={Number(this.state.radius)}
               onChange={this.handleRadiusValueChange}
               tooltipPlacement='top'
               min={20}
-              max={10000}
+              max={100}
             />
           </Form.Group>
           <FormControl type="text" placeholder="Franchise Example" className="mr-sm-2" onChange={this.handleSearchValueChange} />
@@ -132,9 +145,11 @@ export default class Farms extends Component {
                 alt={vendor.distance}
               />
               <Carousel.Caption>
-                <h3> {vendor.responseValues.visaStoreName} Franchise {vendor.responseValues.visaStoreId}</h3>
+                <h3> {vendor.responseValues.visaStoreName}</h3>
                 <p>{vendor.responseValues.distance}iles away</p>
-                <p> {vendor.responseValues.merchantCity}, {vendor.responseValues.merchantState}</p>
+                <p> 
+                  {vendor.responseValues.merchantStreetAddress} {vendor.responseValues.merchantCity}, 
+                  {vendor.responseValues.merchantState} {vendor.responseValues.merchantPostalCode.substring(0,5)}</p>
                 <Link to={this.browseFarmer(vendor.responseValues.visaStoreName)}>Browse Products</Link>
               </Carousel.Caption>
             </Carousel.Item>
