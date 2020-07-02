@@ -49,17 +49,6 @@ export default class Navbar extends Component {
             <Link to="/shop" className="nav-link">Shop</Link>
           </Nav>
           <Nav>
-            <Form inline onSubmit={this.searchProduct}>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                onChange={this.handleSearchValueChange}
-              />
-              <Link to={linkProps}>
-                <Button variant="outline-info" type="submit">Search</Button>
-              </Link>
-            </Form>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="/account">Account</NavDropdown.Item>
               <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
