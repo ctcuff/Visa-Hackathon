@@ -55,7 +55,7 @@ export default class Post extends Component {
                 <div className="Post-stars">
                   <StarRatings
                     rating={randomstars}
-                    starRatedColor="blue"
+                    starRatedColor="black"
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name='rating'
