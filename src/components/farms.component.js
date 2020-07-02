@@ -1,6 +1,6 @@
 import '../styles/farms.css';
-import React, { Component } from 'react';
-import { Button, Carousel, Form, FormControl } from 'react-bootstrap';
+import React, { Component, useState } from 'react';
+import { Button, Carousel, Form, FormControl, Toast } from 'react-bootstrap';
 import axios from 'axios';
 import Farm1 from '../assets/Farm1.jpeg';
 import Farm2 from '../assets/Farm2.jpg';
@@ -67,8 +67,10 @@ export default class Farms extends Component {
           alert('Error: ' + res.error);
           return;
         }
-        this.setState({ vendors: res.data})
-        console.log(res.data)
+        this.setState({ vendors: res.data});
+        if(!res.data){
+          alert("No farms match your search criteria");
+        }
         // axios.get('http://localhost:5000/locater/')
         //   .then(res => {
         //     console.log(res)
@@ -116,6 +118,9 @@ export default class Farms extends Component {
       }
     }
 
+    // const [showA, setShowA] = useState(true);
+    // const toggleShowA = () => setShowA(!showA);
+    const vendors = this.state.vendors || []
     return (
       <div>
         <p> Due to the limitations of data in Sandbox, we fix the Merchant Locator query to a 50 mile radius of the San Francisco Area </p>
@@ -137,7 +142,7 @@ export default class Farms extends Component {
           <Button variant="outline-success" onClick={this.queryMerchants}>Search</Button>
         </Form>
         <Carousel>
-        {this.state.vendors.map((vendor, index) => (
+        {vendors.map((vendor, index) => (
           <Carousel.Item key={index}>
               <img
                 className="farm-carousel-img"
@@ -154,7 +159,9 @@ export default class Farms extends Component {
               </Carousel.Caption>
             </Carousel.Item>
         ))}
+        
         </Carousel>
+        
       </div>
     );
   }
