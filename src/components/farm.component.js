@@ -11,8 +11,8 @@ export default class Farm extends Component {
         };
     }
     componentDidMount() {
-      const farmerName = this.props.location.query.farm
-      if (farmerName) {
+      if (this.props.location.query !== undefined) {
+        const farmerName = this.props.location.query.farm
         axios.get('http://localhost:5000/vendors')
           .then(response => {
             // this.setState({vendors: response.data})
