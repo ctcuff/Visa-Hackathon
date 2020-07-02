@@ -11,3 +11,7 @@
     justify-content: space-between;
     margin-top: 32px;
 }
+
+.react-bs-table table td, .react-bs-table table th {
+    text-overflow: unset !important;
+}
