@@ -40,7 +40,8 @@
   }
   .Post-farmer {
     text-align: center;
-    font-size: 30px;
+    font-size: 32px;
+    font-weight: bold;
   }
   .Post-caption {
     padding: 16px 16px;
@@ -53,6 +54,7 @@
   }
   .Post-status {
     text-align: center;
+    font-size: 28px;
   }
   .Post-stars {
     text-align: center;
@@ -76,4 +78,10 @@
     font-size: 22px;
     text-align: center;
   }
+
+  a:link {
+    color: navy;
+  }
+
+
   
