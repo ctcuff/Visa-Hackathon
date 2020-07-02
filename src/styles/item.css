@@ -53,6 +53,12 @@
   .Post-status {
     text-align: center;
   }
+  .Post-stars {
+    text-align: center;
+  }
+  .Post-comment {
+    text-align: center;
+  }
   .vjs-fade-out {
     display: none;
     visibility: hidden;
