@@ -1,0 +1,35 @@
+.Farmer {
+  border-radius: 3px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  margin-bottom: 60px;
+  margin-left : 20%;
+  margin-right: 20%;
+  }
+  .Farmer-info {
+    text-align: center;
+  }
+
+  .Farmer-image {
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .Farmer-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .Farmer-img-bg {
+    background-color: #efefef;
+  }
+
+  .Farmer-stars {
+    text-align: center;
+  }
+  .Farmer-comment {
+    text-align: center;
+  }
