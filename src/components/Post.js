@@ -14,7 +14,7 @@ export default class Post extends Component {
         const status = this.props.status;
 
         return (
-          <div classname = "Product"> 
+          <div className = "Product"> 
             <article className="Post" ref="Post">
                 <ul> 
                   <li> Order ID: {order}</li>
@@ -23,7 +23,7 @@ export default class Post extends Component {
                   <li> {farm} </li>
                   <li> {status} </li>
                 </ul>
-                <img src={image} alt="../assets/Carrot.jpg" class="responsive"/>
+                <img src={image} alt="../assets/Carrot.jpg" className="responsive"/>
             </article>
           </div>
           

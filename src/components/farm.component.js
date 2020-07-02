@@ -34,7 +34,7 @@ export default class Farm extends Component {
         //let object = this.state.vendors.find(x => x.name === this.state.farm);
         //let object = this.state.vendors.find((vendor, index) => vendor.vendorUsername === this.state.farm)
         return (
-            <div class="container">
+            <div className="container">
                 {this.state.vendors.map((vendor, index) => (
                     <body>
                         <h2> {vendor.username} </h2>
