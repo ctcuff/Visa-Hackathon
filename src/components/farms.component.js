@@ -127,22 +127,26 @@ export default class Farms extends Component {
       <div>
         <p> Due to the limitations of data in Sandbox, we fix the Merchant Locator query to a 50 mile radius of the San Francisco Area </p>
         <p> We recommend searching "Starbucks" </p>
-        <Form className="text-center" inline onSubmit={this.queryMerchants}>
-          <Form.Label>
-            Customize Search Radius
-          </Form.Label>
-          <Form.Group> 
-            <RangeSlider
-              value={Number(this.state.radius)}
-              onChange={this.handleRadiusValueChange}
-              tooltipPlacement='top'
-              min={20}
-              max={100}
-            />
-          </Form.Group>
-          <FormControl type="text" placeholder="Franchise Example" className="mr-sm-2" onChange={this.handleSearchValueChange} />
-          <Button variant="outline-success" onClick={this.queryMerchants}>Search</Button>
-        </Form>
+        <div className="text-center"> 
+          <Form className="text-center" inline onSubmit={this.queryMerchants}>
+            <Form.Label>
+              Customize Search Radius
+            </Form.Label>
+            <Form.Group> 
+              <RangeSlider
+                value={Number(this.state.radius)}
+                onChange={this.handleRadiusValueChange}
+                tooltipPlacement='top'
+                min={20}
+                max={100}
+              />
+            </Form.Group>
+            <Form.Group> 
+              <FormControl type="text" placeholder="Franchise Example" className="mr-sm-2" onChange={this.handleSearchValueChange} />
+              <Button variant="outline-success" onClick={this.queryMerchants}>Search</Button>
+            </Form.Group>
+          </Form>
+        </div>
         <Carousel>
         {vendors.map((vendor, index) => (
           <Carousel.Item key={index}>
