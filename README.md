@@ -31,3 +31,7 @@ npm start
 
 This should open up the locally hosted website in your web browser. Or use [http://localhost:3000](http://localhost:3000). 
 
+## Try Out
+* Create a merchant or a customer account.
+* As a merchant, navigate to the Item Manager to add new items to sell, change the price of existing items, update items to in stock/out of stock, and remove items. Go to the Orders tab to see orders that customers purchased from you.
+* As a consumer, check out the Farms tab to find farms near you, the Shop tab to browse for produce and pay using Visa Checkout, and the Orders tab to view your orders. 
