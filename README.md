@@ -7,7 +7,7 @@
 
 ## About The Project
 
-The Farmer's Market Hub is a central hub for farmers and customers. Due to COVID-19, many farmers have excess produce with no way to sell it, while consumers find it difficult to purchase directly from farms as few farms have an online presence. Further, local farmers markets now have strict rules and capacity limits due to COVID-19, so farmers who typically sold products at these markets saw a decrease in sales. With this website, consumers can find nearby farms using geolocation, purchase produce online, and pick up orders via curbside pickup to avoid direct contact. The Farmer’s Market Hub gives farmers a leg up in the online food industry.
+The Farmer's Market Hub is a central hub for farmers and customers. Due to COVID-19, many farmers have excess produce with no way to sell it, while consumers find it difficult to purchase directly from farms as few farms have an online presence. Further, local farmers markets now have strict rules and capacity limits due to COVID-19, so farmers who typically sold products at these markets saw a decrease in sales. With this website, consumers can find nearby farms using geolocation (Visa Merchant Locator API), purchase produce online (Visa Checkout API), and pick up orders via curbside pickup to avoid direct contact. Farmers can easily manage items and fulfill orders as well. The Farmer’s Market Hub gives farmers a leg up in the online food industry.
 
 ## Built With
 * MongoDB
