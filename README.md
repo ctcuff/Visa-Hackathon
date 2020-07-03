@@ -16,14 +16,14 @@ The Farmer's Market Hub is a central hub for farmers and customers. Due to COVID
 * Node.js
 
 ## Getting Started
-After downloading the repository, in one terminal, run
+After downloading the repository, in one terminal, run:
 ```sh
 cd backend
 npm install all
 node server.js
 ```
 
-After the database connection is established successfully, open another terminal and run
+After the database connection is established successfully, open another terminal and run:
 
 ```sh
 npm start
