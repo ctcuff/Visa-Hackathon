@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
     "mongoose-unique-validator": "^2.0.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "q": "^1.5.1",
     "randomstring": "^1.1.5",
     "react": "^16.13.1",
